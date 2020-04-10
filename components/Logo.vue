@@ -1,6 +1,6 @@
 <template>
 <div>
-  <img src="../assets/blueberry_splat.jpg" width="500" height="300">
+  <img src="~/assets/blueberry_splat.jpg" width="500" height="300">
   </div>
 </template>
 <style>
