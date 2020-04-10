@@ -3,10 +3,10 @@
     <div>
       <logo />
       <h1 class="title">
-        Thesis_Project
+        Sensing Berries
       </h1>
       <h2 class="subtitle">
-        John O thesis 2020
+        Bluberry Sensory Analysis
       </h2>
       <div class="links">
         <a
@@ -49,19 +49,19 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Times New Roman';
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  color: #000000;
   letter-spacing: 1px;
 }
 
 .subtitle {
+  font-family: 'Times New Roman';
   font-weight: 300;
   font-size: 42px;
-  color: #526488;
+  color: #000000;
   word-spacing: 5px;
   padding-bottom: 15px;
 }
