@@ -25,17 +25,22 @@
         </a>
       </div>
     </div>
+      <div class ="bar graph">
+        <bar />
+      </div>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-
+import bar from '~/components/bar.vue'
 export default {
   components: {
-    Logo
+    Logo,
+    bar
   }
 }
+
 </script>
 
 <style>
