@@ -29,8 +29,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
-  ],
+          {src: '@/plugins/element-ui'},
+          {src: '@/plugins/vue-scrollama', mode: 'client'}
+        ],
   /*
   ** Nuxt.js dev-modules
   */

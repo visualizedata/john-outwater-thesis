@@ -1,13 +1,10 @@
 <template>
-<div>
-  <img src="~/assets/blueberry_splat.jpg" width="500" height="300">
+<div class="landing">
+  <!-- <img src="~/assets/landing_text.png" width="500" height="97.5"> -->
+  <img src="~/assets/landing_image.png" width="500" height="415.6">
   </div>
 </template>
 <style>
-.NuxtLogo {
-  animation: 1s appear;
-  margin: auto;
-}
 
 @keyframes appear {
   0% {
