@@ -1,6 +1,6 @@
 # Sensing Blue
 
-![](Hero1.png)
+![](preview.png)
 
 > John O thesis 2020
 
