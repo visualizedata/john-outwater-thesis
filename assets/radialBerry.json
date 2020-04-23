@@ -19,7 +19,7 @@
         {"axis":"fermented", "value":0.09677419355},
         {"axis":"fruity", "value":0.5161290323},
         {"axis":"grassy", "value":0.1935483871},
-        {"axis":"piney", "value":0.03225806452},
+        {"axis":"bitter", "value":0.03225806452},
         {"axis":"texture_like", "value":0.6548387097},
         {"axis":"firmness_intn", "value":0.66359447},
         {"axis":"crispness_intn", "value":0.6267281106},
@@ -29,8 +29,8 @@
         {"axis":"firmness_jar", "value":0.8709677419},
         {"axis":"crispness_jar", "value":0.8494623656},
         {"axis":"juciness_jar", "value":0.8172043011},
-        {"axis":"aftertaste_yn", "value":0.3548387097},
-        {"axis":"aftertaste_intn", "value": 0.2516129032}
+        {"axis":"taste_yn", "value":0.3548387097},
+        {"axis":"taste_intn", "value": 0.2516129032}
         ],
     [
         {"axis":"overall_like", "value":0.6811881188},
@@ -52,7 +52,7 @@
         {"axis":"fermented", "value":0.0396039604},
         {"axis":"fruity", "value":0.4257425743},
         {"axis":"grassy", "value":0.1089108911},
-        {"axis":"piney", "value":0.1188118812},
+        {"axis":"bitter", "value":0.1188118812},
         {"axis":"texture_like", "value":0.7059405941},
         {"axis":"firmness_intn", "value":0.6718528996},
         {"axis":"crispness_intn", "value":0.6619519095},
@@ -62,8 +62,8 @@
         {"axis":"firmness_jar", "value":0.9570957096},
         {"axis":"crispness_jar", "value":0.9339933993},
         {"axis":"juciness_jar", "value": 0.897689769},
-        {"axis":"aftertaste_yn", "value":0.3564356436},
-        {"axis":"aftertaste_intn", "value":0.2376237624}
+        {"axis":"taste_yn", "value":0.3564356436},
+        {"axis":"taste_intn", "value":0.2376237624}
         ],
     [     
         {"axis":"overall_like", "value":0.6079207921},
@@ -85,7 +85,7 @@
         {"axis":"fermented", "value":0.0495049505},
         {"axis":"fruity", "value":0.4455445545},
         {"axis":"grassy", "value":0.1089108911},
-        {"axis":"piney", "value":0.0297029703},
+        {"axis":"bitter", "value":0.0297029703},
         {"axis":"texture_like", "value":0.6455445545},
         {"axis":"firmness_intn", "value":0.6280056577},
         {"axis":"crispness_intn", "value":0.6011315417},
@@ -95,8 +95,8 @@
         {"axis":"firmness_jar", "value":0.9174917492},
         {"axis":"crispness_jar", "value": 0.904290429},
         {"axis":"juciness_jar", "value":0.8811881188},
-        {"axis":"aftertaste_yn", "value":0.2772277228},
-        {"axis":"aftertaste_intn", "value":0.1821782178}
+        {"axis":"taste_yn", "value":0.2772277228},
+        {"axis":"taste_intn", "value":0.1821782178}
         ],
     [
         {"axis":"overall_like", "value": 0.595049505},
@@ -118,7 +118,7 @@
         {"axis":"fermented", "value":0.0495049505},
         {"axis":"fruity", "value":0.4059405941},
         {"axis":"grassy", "value":0.1683168317},
-        {"axis":"piney", "value":0.07920792079},
+        {"axis":"bitter", "value":0.07920792079},
         {"axis":"texture_like", "value":0.6366336634},
         {"axis":"firmness_intn", "value":0.6166902405},
         {"axis":"crispness_intn", "value":0.6025459689},
@@ -128,8 +128,8 @@
         {"axis":"firmness_jar", "value":0.8877887789},
         {"axis":"crispness_jar", "value":0.8877887789},
         {"axis":"juciness_jar", "value":0.8547854785},
-        {"axis":"aftertaste_yn", "value":0.2871287129},
-        {"axis":"aftertaste_intn", "value":0.1702970297}
+        {"axis":"taste_yn", "value":0.2871287129},
+        {"axis":"taste_intn", "value":0.1702970297}
         ],
     [
         {"axis":"overall_like", "value":0.6346534653},
@@ -151,7 +151,7 @@
         {"axis":"fermented", "value":0.0396039604},
         {"axis":"fruity", "value":0.3564356436},
         {"axis":"grassy", "value":0.1881188119},
-        {"axis":"piney", "value":0.07920792079},
+        {"axis":"bitter", "value":0.07920792079},
         {"axis":"texture_like", "value":0.6435643564},
         {"axis":"firmness_intn", "value":0.5643564356},
         {"axis":"crispness_intn", "value":0.5417256011},
@@ -161,8 +161,8 @@
         {"axis":"firmness_jar", "value":0.8745874587},
         {"axis":"crispness_jar", "value":0.8514851485},
         {"axis":"juciness_jar", "value":0.8877887789},
-        {"axis":"aftertaste_yn", "value":0.3168316832},
-        {"axis":"aftertaste_intn", "value":0.2138613861}	
+        {"axis":"taste_yn", "value":0.3168316832},
+        {"axis":"taste_intn", "value":0.2138613861}	
         ],
     [
         {"axis":"overall_like", "value":0.6811881188},
@@ -184,7 +184,7 @@
         {"axis":"fermented", "value":0.0495049505},
         {"axis":"fruity", "value": 0.495049505},
         {"axis":"grassy", "value":0.1584158416},
-        {"axis":"piney", "value":0.05940594059},
+        {"axis":"bitter", "value":0.05940594059},
         {"axis":"texture_like", "value":0.6920792079},
         {"axis":"firmness_intn", "value":0.6449787836},
         {"axis":"crispness_intn", "value":0.6350777935},
@@ -194,8 +194,8 @@
         {"axis":"firmness_jar", "value":0.9207920792},
         {"axis":"crispness_jar", "value":0.9273927393},
         {"axis":"juciness_jar", "value":0.9174917492},
-        {"axis":"aftertaste_yn", "value":0.3069306931},
-        {"axis":"aftertaste_intn", "value":0.2316831683}
+        {"axis":"taste_yn", "value":0.3069306931},
+        {"axis":"taste_intn", "value":0.2316831683}
         ],
     [
         {"axis":"overall_like", "value":0.6085714286},
@@ -217,7 +217,7 @@
         {"axis":"fermented", "value":0.05714285714},
         {"axis":"fruity", "value":0.4},
         {"axis":"grassy", "value":0.1},
-        {"axis":"piney", "value":0.04285714286},
+        {"axis":"bitter", "value":0.04285714286},
         {"axis":"texture_like", "value":0.66},
         {"axis":"firmness_intn", "value":0.6081632653},
         {"axis":"crispness_intn", "value":0.6},
@@ -227,8 +227,8 @@
         {"axis":"firmness_jar", "value":0.8952380952},
         {"axis":"crispness_jar", "value":0.9238095238},
         {"axis":"juciness_jar", "value":0.8857142857},
-        {"axis":"aftertaste_yn", "value":0.3714285714},
-        {"axis":"aftertaste_intn", "value":0.2371428571}
+        {"axis":"taste_yn", "value":0.3714285714},
+        {"axis":"taste_intn", "value":0.2371428571}
         ],
     [
         {"axis":"overall_like", "value":0.5891089109},
@@ -250,7 +250,7 @@
         {"axis":"fermented", "value":0.07920792079},
         {"axis":"fruity", "value":0.3861386139},
         {"axis":"grassy", "value":0.2178217822},
-        {"axis":"piney", "value":0.1386138614},
+        {"axis":"bitter", "value":0.1386138614},
         {"axis":"texture_like", "value":0.6207920792},
         {"axis":"firmness_intn", "value":0.7086280057},
         {"axis":"crispness_intn", "value":0.6690240453},
@@ -260,8 +260,8 @@
         {"axis":"firmness_jar", "value":0.8349834983},
         {"axis":"crispness_jar", "value":0.8679867987},
         {"axis":"juciness_jar", "value":0.8118811881},
-        {"axis":"aftertaste_yn", "value":0.4158415842},
-        {"axis":"aftertaste_intn", "value":0.2415841584}
+        {"axis":"taste_yn", "value":0.4158415842},
+        {"axis":"taste_intn", "value":0.2415841584}
         ],
     [
         {"axis":"overall_like", "value":0.6118811881},
@@ -283,7 +283,7 @@
         {"axis":"fermented", "value":0.0495049505},
         {"axis":"fruity", "value":0.4059405941},
         {"axis":"grassy", "value":0.1485148515},
-        {"axis":"piney", "value":0.1386138614},
+        {"axis":"bitter", "value":0.1386138614},
         {"axis":"texture_like", "value":0.6376237624},
         {"axis":"firmness_intn", "value":0.6421499293},
         {"axis":"crispness_intn", "value":0.6322489392},
@@ -293,8 +293,8 @@
         {"axis":"firmness_jar", "value":0.9108910891},
         {"axis":"crispness_jar", "value":0.9273927393},
         {"axis":"juciness_jar", "value":0.8547854785},
-        {"axis":"aftertaste_yn", "value":0.3366336634},
-        {"axis":"aftertaste_intn", "value":0.2000000000}
+        {"axis":"taste_yn", "value":0.3366336634},
+        {"axis":"taste_intn", "value":0.2000000000}
         ]
         
     ]
