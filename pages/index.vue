@@ -20,13 +20,17 @@
         <div class ="bargraph">
         <bar />
       </div>
+      <div>
+        <scrolly />
+        <bar />
+      </div>
   </div>
 </template>
 
 <script>
 import radialData from "~/assets/radialBerry.json"
 import logo from '~/components/Logo.vue'
-// import scrolly from '~/components/scrolly.vue'
+import scrolly from '~/components/scrolly.vue'
 import bar from '~/components/bar.vue'
 import radial from '~/components/radial.vue'
 export default {
@@ -37,7 +41,7 @@ export default {
   },
   components: {
     logo,
-    // scrolly,
+    scrolly,
     bar,
     radialData,
     radial
