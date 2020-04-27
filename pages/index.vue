@@ -4,7 +4,7 @@
       <h1 class="title">
         Sensing Blue
       </h1>
-      <logo />
+      <!-- <logo /> -->
       <!-- <scrolly /> -->
       <!-- <h2 class="subtitle">
         Bluberry Sensory Analysis
