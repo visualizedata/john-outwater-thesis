@@ -17,5 +17,8 @@
     "nuxt": "^2.0.0",
     "vue-scrollama": "^1.1.9"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "node-sass": "^4.14.0",
+    "sass-loader": "^8.0.2"
+  }
 }

@@ -9,6 +9,9 @@
       <!-- <h2 class="subtitle">
         Bluberry Sensory Analysis
       </h2> -->
+      <div>
+        <scrolly />
+      </div>
       <div class ="radial_chart">
         <radial v-for="(variety,i) in radialData" 
         :key="i" 
@@ -18,10 +21,6 @@
       </div>  
       </div>
         <div class ="bargraph">
-        <bar />
-      </div>
-      <div>
-        <scrolly />
         <bar />
       </div>
   </div>

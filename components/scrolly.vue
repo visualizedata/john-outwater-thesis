@@ -1,11 +1,11 @@
 <template>
   <div>
     <client-only>
-    <Scrollama :offset="$store.offset" @step-enter="stepEnterHandler" id="flexed">
+    <Scrollama :offset="0.5" @step-enter="stepEnterHandler" id="flexed">
       <div slot="graphic" class="graphic">
         <p>{{currStepId}}</p>
       </div>
-      <div>
+      <div
         v-for="step in steps" :key="step.no"
         :data-step-id="step.id"
         class="step" :class="{'is-active': step.id === currStepId}">
