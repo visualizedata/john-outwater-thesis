@@ -1,10 +1,14 @@
 <template>
 <div class="landing">
   <!-- <img src="~/assets/landing_text.png" width="500" height="97.5"> -->
-  <img src="~/assets/landing_image.png" width="500" height="415.6">
+  <img src="~/assets/landingFinal.png" width="488" height="400">
   </div>
 </template>
-<style>
+<style scoped>
+
+.landing {
+  padding-top: 20px;
+}
 
 @keyframes appear {
   0% {

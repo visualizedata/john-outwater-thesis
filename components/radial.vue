@@ -18,7 +18,7 @@ export default {
     // width: Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
     height: 600,
     // height: Math.min(width, window.innerHeight - margin.top - margin.bottom - 20),
-	margin: {top: 25, left: 25, bottom: 25, right: 25 }
+	// margin: {top: 0, left: 0, bottom: 25, right: 25 }
     };
   },
  props: [
@@ -29,17 +29,17 @@ export default {
     RadarChart(id, data, options) {
 
 	var cfg = {
-	 width: 250,				//Width of the circle
-	 height: 250,				//Height of the circle
-	 margin: {top: 100, right: 100, bottom: 100, left: 100}, //The margins of the SVG
+	 width: 300,				//Width of the circle
+	 height: 300,				//Height of the circle
+	 margin: {top: 50, right: 70, bottom: 50, left: 70}, //The margins of the SVG
 	 levels: 5,				//How many levels or inner circles should there be drawn
 	 maxValue: 1.0, 		//What is the value that the biggest circle will represent
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
-	 opacityArea: 0.35, 	//The opacity of the area of the blob
+	//  opacityArea: 0.35, 	//The opacity of the area of the blob
 	 dotRadius: 4, 			//The size of the colored circles of each blob
 	 opacityCircles: 0.1, 	//The opacity of the circles of each blob
-	 strokeWidth: 1, 		//The width of the stroke around each blob
+	 strokeWidth: 3, 		//The width of the stroke around each blob
 	 roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.schemeCategory10	//Color function
 	};
@@ -112,8 +112,8 @@ export default {
 		.append("circle")
 		.attr("class", "gridCircle")
 		.attr("r", function(d, i){return radius/cfg.levels*d;})
-		.style("fill", "white")
-		.style("stroke", "#CDCDCD")
+		.style("fill", "none")
+		.style("stroke", "lightgray")
 		.style("fill-opacity", cfg.opacityCircles)
 		.style("filter" , "url(#glow)");
 
@@ -150,7 +150,7 @@ export default {
 	//Append the labels at each axis
 	axis.append("text")
 		.attr("class", "legend")
-		.style("font-size", "5px")
+		.style("font-size", "8px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "0.35em")
 		.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
@@ -181,24 +181,46 @@ export default {
 		.append("path")
 		.attr("class", "radarArea")
 		.attr("d", function(d,i) { return radarLine(d); })
-		.style("fill", "0b4780")
-		.style("fill-opacity", cfg.opacityArea)
+		.style("fill", "#fffcf6")
+		.style("fill-opacity", "0")
+		// .style("fill", "none")
+		// .style("fill-opacity", cfg.opacityArea)
+		.on('mouseover', synchronizedMouseOver)
 		// .on('mouseover', function (d,i){
-		// 	//Dim all blobs
-		// 	d3.selectAll(".radarArea")
-		// 		.transition().duration(200)
-		// 		.style("fill-opacity", 0.1); 
-		// 	//Bring back the hovered over blob
-		// 	d3.select(this)
-		// 		.transition().duration(200)
-		// 		.style("fill-opacity", 0.7);	
+			//Dim all blobs
+			// d3.selectAll(".radarArea")
+			// 	.transition().duration(200)
+			// 	.style("fill-opacity", 0.1); 
+			//Bring back the hovered over blob
+			// d3.select(this)
+			// 	.transition().duration(200)
+			// 	.style("fill", "#0b4780")
+			// 	.style("fill-opacity", 0.6);
+
+			// d3.select(this).select('.axis')
+			// 	.transition().duration(200)
+			// 	.style("stroke", "black");
+			
+			// d3.select(this.svg)
+			// 	.transition().duration(200)
+			// 	.attr("width", 500)
+			// 	.attr("height", 500);
 		// })
-		// .on('mouseout', function(){
-		// 	//Bring back all blobs
-		// 	d3.selectAll(".radarArea")
-		// 		.transition().duration(200)
-		// 		.style("fill-opacity", cfg.opacityArea);
-		// });
+		.on('mouseout', function(){
+			//Bring back all blobs to original style
+			d3.selectAll(".radarArea")
+				.transition().duration(0)
+				.style("fill", "#fffcf6")
+				.style("fill-opacity", "0")
+		});
+	function synchronizedMouseOver(d,i) {
+    		var radarFill = d3.select(this)
+				.transition().duration(0)
+				.style("fill", "#0b4780")
+				.style("fill-opacity", 0.5);
+			var mouseAxisCircle = d3.selectAll(".line")
+				.style("stroke", "#000000");
+  	};
 		
 	//Create the outlines	
 	blobWrapper.append("path")
@@ -207,18 +229,30 @@ export default {
 		.style("stroke-width", cfg.strokeWidth + "px")
 		.style("stroke", function(d,i) { return cfg.color(i); })
 		.style("fill", "none")
-		// .style("filter" , "url(#glow)");
+		.on('mouseover', function(d,i){
+			d3.select(this)
+				.transition().duration(0)
+				.style("fill", "#0b4780")
+				.style("fill-opacity", 0.5);
+		})
+		.on('mouseout', function(){
+			d3.selectAll(".radarStroke")
+				.transition().duration(0)
+				.style("fill", "#fffcf6")
+				.style("fill-opacity", "0")
+		});
 	
 	// Append the circles
-	// blobWrapper.selectAll(".radarCircle")
-	// 	.data(function(d,i) { return d; })
-	// 	.enter().append("circle")
-	// 	.attr("class", "radarCircle")
-	// 	.attr("r", cfg.dotRadius)
-	// 	.attr("cx", function(d,i){ return rScale2[i](d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-	// 	.attr("cy", function(d,i){ return rScale2[i](d.value) * Math.sin(angleSlice*i - Math.PI/2); })
-	// 	.style("fill", function(d,i,j) { return cfg.color(j); })
-	// 	.style("fill-opacity", 0.8);
+	blobWrapper.selectAll(".radarCircle")
+		.data(function(d,i) { return d; })
+		.enter().append("circle")
+		.attr("class", "radarCircle")
+		// .attr("r", cfg.dotRadius)
+		.attr("r", 3.0)
+		.attr("cx", function(d,i){ return rScale2[i](d.value) * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("cy", function(d,i){ return rScale2[i](d.value) * Math.sin(angleSlice*i - Math.PI/2); })
+		.style("fill", function(d,i,j) { return cfg.color(j); })
+		.style("fill-opacity", 0);
 
 
 	//Append invisible circles for tooltip//
@@ -234,18 +268,20 @@ export default {
 		.enter().append("circle")
 		.attr("class", "radarInvisibleCircle")
 		.attr("r", cfg.dotRadius*1.5)
-		.attr("cx", function(d,i){ return rScale(d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("cy", function(d,i){ return rScale(d.value) * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("cx", function(d,i){ return rScale2[i](d.value) * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("cy", function(d,i){ return rScale2[i](d.value) * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", "none")
 		.style("pointer-events", "all")
 		.on("mouseover", function(d,i) {
-			newX =  parseFloat(d3.select(this).attr('cx')) - 10;
-			newY =  parseFloat(d3.select(this).attr('cy')) - 10;
+			var newX =  parseFloat(d3.select(this).attr('cx'));
+			var newY =  parseFloat(d3.select(this).attr('cy'));
 					
 			tooltip
-				.attr('x', newX)
-				.attr('y', newY)
-				.text(Format(d.value))
+				.attr('x', newX+5)
+				.attr('y', newY+5)
+				.text(d.rank)
+				.attr("font-family", "sans-serif")
+      			.attr("font-size", 10)
 				.transition().duration(200)
 				.style('opacity', 1);
 		})

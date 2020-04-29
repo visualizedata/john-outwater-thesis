@@ -18,6 +18,7 @@
     "vue-scrollama": "^1.1.9"
   },
   "devDependencies": {
+    "@nuxtjs/svg": "^0.1.11",
     "node-sass": "^4.14.0",
     "sass-loader": "^8.0.2"
   }
