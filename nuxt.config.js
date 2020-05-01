@@ -46,6 +46,11 @@ export default {
   /*
   ** Build configuration
   */
+
+  router: {
+    base:"https://joutwater.github.io/jo_berry_code/"
+  },
+
   build: {
     transpile: [/^element-ui/],
     /*
