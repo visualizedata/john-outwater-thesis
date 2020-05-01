@@ -1,7 +1,7 @@
 <template>
   <div>
     <client-only>
-    <Scrollama :offset="0.5" @step-enter="stepEnterHandler" id="flexed">
+    <Scrollama :offset="0.6" @step-enter="stepEnterHandler" id="flexed">
       <div slot="graphic" class="graphic">
         <img :src="steps[currStepId-1].image" width="700"/>
       </div>

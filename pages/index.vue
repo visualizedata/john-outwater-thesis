@@ -13,23 +13,33 @@
       <div class="tri_override">
         <triangle />
       </div>
-      <div class='icon_scroll'></div>
-      <article class='intro_text'>
-
+      <div class="icon_scroll"></div>
+      <article>
+        <h3 class="flavor_title">Is flavor quantifiable?</h3>
+            <div class="flavor_text">Human food consumption - A daily necessity and primal, sensory experience. Our sensory systems have evolved greatly over time, allowing us to perceive flavor more effectively than any other organism. This ability allows us to recall and associate specific emotions with flavor experiences, making food an important part of our lives both physically and mentally. Using sensory data from an agriculture business specialized in growing berries, we will explore the sensory experience of blueberry consumption in an effort to quantify the qualitative components of the process and find patterns in flavor and quality. The goal of this research and berry flavor visualization is to create an analytical and comprehensive flavor data tool that will offer new insights in berry sensory analysis. This project is designed not only for agricultural specialists focused on berry cultivation but audience members of all types. The project will inform the audience of the meticulous measures taken in analyzing berry flavor and the visual potential that can be leveraged for communication of such subjective data. Furthermore, this project is meant to promote conscious nourishment and highlight the momentary beauty of food consumption during our busy, fast-paced lives.
+          </div>
       </article>
       <div class="sensory_scroll">
-        <scrolly />
+          <scrolly />
+      </div>
+      <article class="breeding_text">
+        <h3 class="flavor_title">Creation of the perfect blueberry</h3>
+          <div class="flavor_text">Human food consumption - A daily necessity and primal, sensory experience. Our sensory systems have evolved greatly over time, allowing us to perceive flavor more effectively than any other organism. This ability allows us to recall and associate specific emotions with flavor experiences, making food an important part of our lives both physically and mentally. Using sensory data from an agriculture business specialized in growing berries, we will explore the sensory experience of blueberry consumption in an effort to quantify the qualitative components of the process and find patterns in flavor and quality. The goal of this research and berry flavor visualization is to create an analytical and comprehensive flavor data tool that will offer new insights in berry sensory analysis. This project is designed not only for agricultural specialists focused on berry cultivation but audience members of all types. The project will inform the audience of the meticulous measures taken in analyzing berry flavor and the visual potential that can be leveraged for communication of such subjective data. Furthermore, this project is meant to promote conscious nourishment and highlight the momentary beauty of food consumption during our busy, fast-paced lives.
+          </div>
+      </article>
+      <div class="breeding_scroll">
+          <scrolly2 />
       </div>
       <div class ="radial_chart">
-        <radial v-for="(variety,i) in radialData" 
-        :key="i" 
-        :id="i" 
-        :allData="radialData"/>
-        <radial :allData="radialData"/>
+          <radial v-for="(variety,i) in radialData" 
+          :key="i" 
+          :id="i" 
+          :allData="radialData"/>
+          <!-- <radial :allData="radialData"/> -->
       </div>  
       </div>
-        <div class ="bar_graph">
-        <bar />
+          <div class ="bar_graph">
+          <bar />
       </div>
   </div>
 </template>
@@ -38,6 +48,7 @@
 import landing from '~/components/Logo.vue'
 import triangle from '~/components/triangle_scroll.vue'
 import scrolly from '~/components/scrolly.vue'
+import scrolly2 from '~/components/scrolly2.vue'
 import bar from '~/components/bar.vue'
 import radial from '~/components/radial.vue'
 import radialData from "~/assets/radialBerry.json"
@@ -51,6 +62,7 @@ export default {
     landing,
     triangle,
     scrolly,
+    scrolly2,
     bar,
     radial,
     radialData
@@ -88,7 +100,7 @@ export default {
   -webkit-text-fill-color: #0b4780;
   -webkit-text-stroke-width: 0px;
   letter-spacing: 1px;
-  padding-top: 10px;
+  padding-top: 50px;
   padding-bottom: 0px;
 }
 
@@ -100,7 +112,7 @@ export default {
   -webkit-text-fill-color: #0b4780;
   letter-spacing: 1px;
   word-spacing: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 40px;
   padding-top: 0px;
 }
 
@@ -111,8 +123,11 @@ export default {
 
 .radial_chart {
  display: flex;
- flex-wrap: wrap;
- align-content: center;
+ /* flex-wrap: wrap; */
+ bottom: 0px;
+ padding-top: 300px;
+ padding-bottom: 300px;
+ align-content: space-between;
  justify-content: center;
 }
 
@@ -124,7 +139,7 @@ export default {
   letter-spacing: 1px;
   /* word-spacing: 10px; */
   padding-bottom: 0px;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .tri_override{
@@ -165,8 +180,29 @@ export default {
   animation-name: scroll;
 }
 
+.flavor_title{
+  font-family: 'DM Serif Display';
+  font-weight: 400;
+  font-size: 29px;
+  -webkit-text-fill-color: #0b4780;
+  padding: 20rem 16rem 1rem;
+  text-align: left;
+}
+
+.flavor_text{
+  column-count: 2;
+  column-gap: 70px;
+  font-family: 'HelveticaNeue-Light';
+  font-weight: 400;
+  font-size: 17px;
+  padding: 0 16rem 20rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .sensory_scroll{
   padding-top: 20px;
+  margin-bottom: 100px;
 }
 
     @keyframes scroll {

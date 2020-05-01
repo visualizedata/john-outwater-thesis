@@ -19,15 +19,24 @@ export default {
     height: 600,
     // height: Math.min(width, window.innerHeight - margin.top - margin.bottom - 20),
 	// margin: {top: 0, left: 0, bottom: 25, right: 25 }
-    };
+
+	
+
+
+	};
+	
   },
  props: [
 	 "allData",
 	 "id"
  ],
+
+
+
+ 
  methods: {
     RadarChart(id, data, options) {
-
+	let _this=this;
 	var cfg = {
 	 width: 300,				//Width of the circle
 	 height: 300,				//Height of the circle
@@ -36,13 +45,14 @@ export default {
 	 maxValue: 1.0, 		//What is the value that the biggest circle will represent
 	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
-	//  opacityArea: 0.35, 	//The opacity of the area of the blob
 	 dotRadius: 4, 			//The size of the colored circles of each blob
 	 opacityCircles: 0.1, 	//The opacity of the circles of each blob
 	 strokeWidth: 3, 		//The width of the stroke around each blob
 	 roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.schemeCategory10	//Color function
 	};
+
+	
 	
 	//Put all of the options into a variable called cfg
 	if('undefined' !== typeof options){
@@ -62,7 +72,7 @@ export default {
 
 	//If the supplied maxValue is smaller than the actual one, replace by the max in the data
 	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
-		
+		console.log(maxValue);
 	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
 		// allValue = (data[0].map(function(n, t){return n.value})),
 		total = allAxis.length,					//The number of different axes
@@ -87,13 +97,16 @@ export default {
 	
 	//Initiate the radar chart SVG
 	var svg = d3.select('#radial-'+this.id).append("svg")
-			.attr("width",  cfg.width + cfg.margin.left + cfg.margin.right)
-			.attr("height", cfg.height + cfg.margin.top + cfg.margin.bottom)
-			.attr("class", "radar"+id);
+			// .attr("width",  "880")
+			// .attr("height", "800")
+			.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)/3)
+			.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3)
+			.attr("class", "radar" + _this.id);
+			// .attr("class", "radar"+id + _this.id);
 	//Append a g element		
 	var g = svg.append("g")
-			.attr("transform", "translate(" + (cfg.width/2 + cfg.margin.left) + "," + (cfg.height/2 + cfg.margin.top) + ")");
-	
+			.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3) + ")")
+			.attr("class", "transformRadar" + _this.id);
 	//Filter for the outside glow
 	var filter = g.append('defs').append('filter').attr('id','glow'),
 		feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
@@ -110,24 +123,11 @@ export default {
 	   .data(d3.range(1,(cfg.levels+1)).reverse())
 	   .enter()
 		.append("circle")
-		.attr("class", "gridCircle")
-		.attr("r", function(d, i){return radius/cfg.levels*d;})
+		.attr("class", "gridCircle" + _this.id)
+		.attr("r", function(d, i){return (radius/cfg.levels*d)/3;})
 		.style("fill", "none")
 		.style("stroke", "lightgray")
-		.style("fill-opacity", cfg.opacityCircles)
-		.style("filter" , "url(#glow)");
-
-	//Text indicating at what % each level is
-	// axisGrid.selectAll(".axisLabel")
-	//   .data(d3.range(1,(cfg.levels+1)).reverse())
-	//   .enter().append("text")
-	//   .attr("class", "axisLabel")
-	//   .attr("x", 4)
-	//   .attr("y", function(d){return -d*radius/cfg.levels;})
-	//   .attr("dy", "0.4em")
-	//   .style("font-size", "10px")
-	//   .attr("fill", "#737373")
-	//   .text(function(d,i) { return Format(maxValue * d/cfg.levels); });
+		.style("stroke-opacity", "0");
 
 	//Draw the axes//
 	//Create the straight lines radiating outward from the center
@@ -141,20 +141,21 @@ export default {
 	axis.append("line")
 		.attr("x1", 0)
 		.attr("y1", 0)
-		.attr("x2", function(d, i){ return rScale(maxValue*1.0) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("y2", function(d, i){ return rScale(maxValue*1.0) * Math.sin(angleSlice*i - Math.PI/2); })
-		.attr("class", "line")
+		.attr("x2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("y2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("class", "line" + _this.id)
 		.style("stroke", "lightgray")
+		.style("stroke-opacity", "0")
 		.style("stroke-width", "1px");
 
 	//Append the labels at each axis
 	axis.append("text")
-		.attr("class", "legend")
-		.style("font-size", "8px")
+		.attr("class", "legend" + _this.id)
+		.style("font-size", "0px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "0.35em")
-		.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("y", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("x", function(d, i){ return rScale(2.1*maxValue) * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("y", function(d, i){ return rScale(2.1*maxValue) * Math.sin(angleSlice*i - Math.PI/2); })
 		.text(function(d){return d})
 		.call(wrap, cfg.wrapWidth);
 
@@ -162,19 +163,17 @@ export default {
 	//The radial line function
 	var radarLine = d3.lineRadial()
 		// .interpolate("linear-closed")
-		.radius(function(d,i) { return rScale2[i](d.value); })
+		.radius(function(d,i) { return (rScale2[i](d.value)/3); })
 		.angle(function(d,i) {	return i*angleSlice; })
-		.curve(d3.curveCardinalClosed);
-		
-	// if(cfg.roundStrokes) {
-	// 	radarLine.interpolate("cardinal-closed");
-	// }
-				
+		.curve(d3.curveCardinalClosed)
+	
 	//Create a wrapper for the blobs	
 	var blobWrapper = g.selectAll(".radarWrapper")
 		.data(data)
 		.enter().append("g")
 		.attr("class", "radarWrapper");
+
+	var isOn = false;
 			
 	//Append the backgrounds	
 	blobWrapper
@@ -183,74 +182,211 @@ export default {
 		.attr("d", function(d,i) { return radarLine(d); })
 		.style("fill", "#fffcf6")
 		.style("fill-opacity", "0")
-		// .style("fill", "none")
-		// .style("fill-opacity", cfg.opacityArea)
-		.on('mouseover', synchronizedMouseOver)
-		// .on('mouseover', function (d,i){
-			//Dim all blobs
-			// d3.selectAll(".radarArea")
-			// 	.transition().duration(200)
-			// 	.style("fill-opacity", 0.1); 
-			//Bring back the hovered over blob
-			// d3.select(this)
-			// 	.transition().duration(200)
-			// 	.style("fill", "#0b4780")
-			// 	.style("fill-opacity", 0.6);
+		.style("stroke", "#0b4780")
+		.style("stroke-width", "2px")
 
-			// d3.select(this).select('.axis')
-			// 	.transition().duration(200)
-			// 	.style("stroke", "black");
+		.on('click', function (d,i) {
+
+			var clickedObj = document.getElementById("radial-" + _this.id);
+			var clickedObjId = clickedObj.id.split("-")[1];
+
+
+
 			
-			// d3.select(this.svg)
-			// 	.transition().duration(200)
-			// 	.attr("width", 500)
-			// 	.attr("height", 500);
-		// })
-		.on('mouseout', function(){
-			//Bring back all blobs to original style
-			d3.selectAll(".radarArea")
-				.transition().duration(0)
-				.style("fill", "#fffcf6")
-				.style("fill-opacity", "0")
-		});
-	function synchronizedMouseOver(d,i) {
-    		var radarFill = d3.select(this)
-				.transition().duration(0)
+
+			
+			if (!isOn) {
+				isOn = true;
+
+			d3.select(this)
+				.transition().duration(500)
+				.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)*2); }))
 				.style("fill", "#0b4780")
-				.style("fill-opacity", 0.5);
-			var mouseAxisCircle = d3.selectAll(".line")
-				.style("stroke", "#000000");
-  	};
+				.style("fill-opacity", 0.6);
+
+			d3.selectAll('.gridCircle' + _this.id)
+				.transition().duration(500)
+				.style("stroke-opacity", "1")
+				.attr("r", function(d, i){return (radius*2)/cfg.levels*d;});
+
+			d3.selectAll('.line' + _this.id)
+				.transition().duration(500)
+				.attr("x2", function(d, i){ return rScale(maxValue*2.0) * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("y2", function(d, i){ return rScale(maxValue*2.0) * Math.sin(angleSlice*i - Math.PI/2); })
+				.style("stroke-opacity", "1");
+
+			d3.selectAll('.legend' + _this.id)
+				.transition().duration(2000)
+				.style("font-size", "8px");
+			
+			d3.selectAll(".radar" + _this.id)
+				.transition().duration(500)
+				.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)*2)
+				.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)*2);
+
+			d3.selectAll(".transformRadar" + _this.id)
+				.transition().duration(500)	
+				.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)*2) + "," + ((cfg.height/2 + cfg.margin.top)*2) + ")");
+			
+			d3.selectAll(".radarCircle" + _this.id)
+				.transition().duration(500)
+				.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+			
+			d3.selectAll(".radarInvisibleCircle" + _this.id)
+			.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
+			.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+
+
+			} else if (isOn) {
+				console.log("Need to minimize last clicked obj");
+				
+				//var lastClickedId = lastClicked.id;
+				//console.log(lastClickedId);
+
+				isOn = false;
+				
+				
+				d3.selectAll(".radarArea")
+					.transition().duration(500)
+					.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)/3); }))
+					.style("fill", "#fffcf6")
+					.style("fill-opacity", "0");
+
+				d3.selectAll('.gridCircle' + clickedObjId)
+					.transition().duration(500)
+					.attr("r", function(d, i){return (radius/cfg.levels*d)/3;})
+					.style("stroke-opacity", "0");
+
+				d3.selectAll('.line' + clickedObjId)
+					.transition().duration(500)
+					.attr("x2", function(d, i){ return rScale(maxValue/3) * Math.cos(angleSlice*i - Math.PI/2); })
+					.attr("y2", function(d, i){ return rScale(maxValue/3) * Math.sin(angleSlice*i - Math.PI/2); })
+					.style("stroke-opacity", "0");
+				
+				d3.selectAll('.legend' + clickedObjId)
+					.transition().duration(0)
+					.style("font-size", "0px");
+
+				d3.selectAll(".radar" + clickedObjId)
+					.transition().duration(500)
+					.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)/3)
+					.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3);
+
+				d3.selectAll(".transformRadar" + clickedObjId)
+					.transition().duration(500)	
+					.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3) + ")");
+				
+			
+			}
+
+			/*
+			
+			d3.select(this)
+				.transition().duration(500)
+				.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)*2); }))
+				.style("fill", "#0b4780")
+				.style("fill-opacity", 0.6);
+
+			d3.selectAll('.gridCircle' + _this.id)
+				.transition().duration(500)
+				.style("stroke-opacity", "1")
+				.attr("r", function(d, i){return (radius*2)/cfg.levels*d;});
+
+			d3.selectAll('.line' + _this.id)
+				.transition().duration(500)
+				.attr("x2", function(d, i){ return rScale(maxValue*2.0) * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("y2", function(d, i){ return rScale(maxValue*2.0) * Math.sin(angleSlice*i - Math.PI/2); })
+				.style("stroke-opacity", "1");
+
+			d3.selectAll('.legend' + _this.id)
+				.transition().duration(2000)
+				.style("font-size", "8px");
+			
+			d3.selectAll(".radar" + _this.id)
+				.transition().duration(500)
+				.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)*2)
+				.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)*2);
+
+			d3.selectAll(".transformRadar" + _this.id)
+				.transition().duration(500)	
+				.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)*2) + "," + ((cfg.height/2 + cfg.margin.top)*2) + ")");
+			
+			d3.selectAll(".radarCircle" + _this.id)
+				.transition().duration(500)
+				.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+			
+			d3.selectAll(".radarInvisibleCircle" + _this.id)
+			.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
+			.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+
+			*/
+		});
+		
+
+		// .on('mouseout', function(){
+		// // 	//Bring blob to original style
+		// 	d3.selectAll(".radarArea")
+		// 		.transition().duration(500)
+		// 		.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)); }))
+		// 		.style("fill", "#fffcf6")
+		// 		.style("fill-opacity", "0");
+
+		// 	d3.selectAll('.gridCircle' + _this.id)
+		// 		.transition().duration(500)
+		// 		.attr("r", function(d, i){return (radius)/cfg.levels*d;})
+		// 		.style("stroke-opacity", "0");
+
+		// 	d3.selectAll('.line' + _this.id)
+		// 		.transition().duration(500)
+		// 		.attr("x2", function(d, i){ return rScale(maxValue*1.0) * Math.cos(angleSlice*i - Math.PI/2); })
+		// 		.attr("y2", function(d, i){ return rScale(maxValue*1.0) * Math.sin(angleSlice*i - Math.PI/2); })
+		// 		.style("stroke-opacity", "0");
+			
+		// 	d3.selectAll('.legend' + _this.id)
+		// 		.transition().duration(0)
+		// 		.style("font-size", "0px");
+
+		// 	d3.selectAll(".radar" + _this.id)
+		// 		.transition().duration(500)
+		// 		.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right))
+		// 		.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom));
+
+		// 	d3.selectAll(".transformRadar" + _this.id)
+		// 		.transition().duration(500)	
+		// 		.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)) + "," + ((cfg.height/2 + cfg.margin.top)) + ")");
+		// });
 		
 	//Create the outlines	
-	blobWrapper.append("path")
-		.attr("class", "radarStroke")
-		.attr("d", function(d,i) { return radarLine(d); })
-		.style("stroke-width", cfg.strokeWidth + "px")
-		.style("stroke", function(d,i) { return cfg.color(i); })
-		.style("fill", "none")
-		.on('mouseover', function(d,i){
-			d3.select(this)
-				.transition().duration(0)
-				.style("fill", "#0b4780")
-				.style("fill-opacity", 0.5);
-		})
-		.on('mouseout', function(){
-			d3.selectAll(".radarStroke")
-				.transition().duration(0)
-				.style("fill", "#fffcf6")
-				.style("fill-opacity", "0")
-		});
+	// blobWrapper.append("path")
+	// 	.attr("class", "radarStroke")
+	// 	.attr("d", function(d,i) { return radarLine(d); })
+	// 	.style("stroke-width", cfg.strokeWidth + "px")
+	// 	.style("stroke", function(d,i) { return cfg.color(i); })
+	// 	.style("fill", "none")
+	// 	.on('mouseover', function(d,i){
+	// 		d3.select(this)
+	// 			.transition().duration(0)
+	// 			.style("fill", "#0b4780")
+	// 			.style("fill-opacity", 0.5);
+	// 	})
+	// 	.on('mouseout', function(){
+	// 		d3.selectAll(".radarStroke")
+	// 			.transition().duration(0)
+	// 			.style("fill", "#fffcf6")
+	// 			.style("fill-opacity", "0")
+	// 	});
 	
 	// Append the circles
 	blobWrapper.selectAll(".radarCircle")
 		.data(function(d,i) { return d; })
 		.enter().append("circle")
-		.attr("class", "radarCircle")
+		.attr("class", "radarCircle" + _this.id)
 		// .attr("r", cfg.dotRadius)
-		.attr("r", 3.0)
-		.attr("cx", function(d,i){ return rScale2[i](d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("cy", function(d,i){ return rScale2[i](d.value) * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("r", 4.0)
+		.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", function(d,i,j) { return cfg.color(j); })
 		.style("fill-opacity", 0);
 
@@ -266,10 +402,10 @@ export default {
 	blobCircleWrapper.selectAll(".radarInvisibleCircle")
 		.data(function(d,i) { return d; })
 		.enter().append("circle")
-		.attr("class", "radarInvisibleCircle")
-		.attr("r", cfg.dotRadius*1.5)
-		.attr("cx", function(d,i){ return rScale2[i](d.value) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("cy", function(d,i){ return rScale2[i](d.value) * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("class", "radarInvisibleCircle" + _this.id)
+		.attr("r", cfg.dotRadius*3)
+		.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", "none")
 		.style("pointer-events", "all")
 		.on("mouseover", function(d,i) {
@@ -320,7 +456,11 @@ export default {
 			line.pop();
 			tspan.text(line.join(" "));
 			line = [word];
-			tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+			tspan = text.append("tspan")
+				.attr("x", x)
+				.attr("y", y)
+				.attr("dy", ++lineNumber * lineHeight + dy + "em")
+				.text(word);
 		  }
 		}
 	  });
