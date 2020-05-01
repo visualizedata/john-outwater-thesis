@@ -48,7 +48,9 @@ export default {
   */
 
   router: {
-    base:"https://joutwater.github.io/jo_berry_code/"
+    base:"https://joutwater.github.io/jo_berry_code/",
+    mode:"hash"
+
   },
 
   build: {
