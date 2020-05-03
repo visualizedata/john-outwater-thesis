@@ -122,14 +122,20 @@ export default {
 }
 
 .radial_chart {
+ position: relative;
+ height: 1000px;
  display: flex;
  /* flex-wrap: wrap; */
  bottom: 0px;
- padding-top: 300px;
+ margin-top: 300px;
  padding-bottom: 300px;
- align-content: space-between;
+ /* align-content: space-between; */
  justify-content: center;
 }
+
+/* .legend5{
+	transform: rotate(-90deg);
+} */
 
 .scroll_text{
   font-family: 'DM Serif Display';

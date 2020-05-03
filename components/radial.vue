@@ -19,7 +19,7 @@ export default {
     height: 600,
     // height: Math.min(width, window.innerHeight - margin.top - margin.bottom - 20),
 	// margin: {top: 0, left: 0, bottom: 25, right: 25 }
-
+	isOn: false,
 	
 
 
@@ -28,7 +28,8 @@ export default {
   },
  props: [
 	 "allData",
-	 "id"
+	 "id",
+	 "highlight"
  ],
 
 
@@ -51,6 +52,17 @@ export default {
 	 roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
 	 color: d3.schemeCategory10	//Color function
 	};
+
+ var varietyName = ["Big Eye",
+					"Wallaby",
+					"LZ713.401",
+					"LZ855.512",
+					"LZ856.103",
+					"Kodiak",
+					"Pluto",
+					"GR112.301",
+					"GR207.677"
+					];
 
 	
 	
@@ -99,6 +111,9 @@ export default {
 	var svg = d3.select('#radial-'+this.id).append("svg")
 			// .attr("width",  "880")
 			// .attr("height", "800")
+			.style("position", "relative")
+			.style("top", "0px")
+			.style("left", "0%")
 			.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)/3)
 			.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3)
 			.attr("class", "radar" + _this.id);
@@ -143,19 +158,20 @@ export default {
 		.attr("y1", 0)
 		.attr("x2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("y2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.sin(angleSlice*i - Math.PI/2); })
-		.attr("class", "line" + _this.id)
+		.attr("class", "line" + _this.id + " line")
 		.style("stroke", "lightgray")
 		.style("stroke-opacity", "0")
 		.style("stroke-width", "1px");
 
 	//Append the labels at each axis
 	axis.append("text")
-		.attr("class", "legend" + _this.id)
-		.style("font-size", "0px")
+		.attr("class", "legend" + _this.id + " legend")
+		.attr("font-family", "HelveticaNeue-Light")
+		.style("font-size", "5px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "0.35em")
-		.attr("x", function(d, i){ return rScale(2.1*maxValue) * Math.cos(angleSlice*i - Math.PI/2); })
-		.attr("y", function(d, i){ return rScale(2.1*maxValue) * Math.sin(angleSlice*i - Math.PI/2); })
+		.attr("x", function(d, i){ return rScale(2.0*maxValue) * Math.cos(angleSlice*i - Math.PI/2); })
+		.attr("y", function(d, i){ return rScale(2.0*maxValue) * Math.sin(angleSlice*i - Math.PI/2); })
 		.text(function(d){return d})
 		.call(wrap, cfg.wrapWidth);
 
@@ -173,85 +189,99 @@ export default {
 		.enter().append("g")
 		.attr("class", "radarWrapper");
 
-	var isOn = false;
+	
 			
 	//Append the backgrounds	
 	blobWrapper
 		.append("path")
-		.attr("class", "radarArea")
+		.attr("class", "radarArea" + _this.id + " radarArea")
 		.attr("d", function(d,i) { return radarLine(d); })
 		.style("fill", "#fffcf6")
 		.style("fill-opacity", "0")
 		.style("stroke", "#0b4780")
-		.style("stroke-width", "2px")
+		.style("stroke-width", "1px")
 
 		.on('click', function (d,i) {
 
 			var clickedObj = document.getElementById("radial-" + _this.id);
 			var clickedObjId = clickedObj.id.split("-")[1];
 
-
-
-			
-
-			
-			if (!isOn) {
-				isOn = true;
+		
+			if (!this.isOn) {
+				this.isOn = true;
 
 			d3.select(this)
 				.transition().duration(500)
-				.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)*2); }))
+				.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)*1.7); }))
 				.style("fill", "#0b4780")
-				.style("fill-opacity", 0.6);
+				.style("fill-opacity", 0.6)
+				.style("stroke-width", "2px");
+			
+			// d3.select('.radarArea')
+			// 	.style("stroke-width", "1px");
 
 			d3.selectAll('.gridCircle' + _this.id)
 				.transition().duration(500)
 				.style("stroke-opacity", "1")
-				.attr("r", function(d, i){return (radius*2)/cfg.levels*d;});
+				.attr("r", function(d, i){return (radius*1.7)/cfg.levels*d;});
 
 			d3.selectAll('.line' + _this.id)
 				.transition().duration(500)
-				.attr("x2", function(d, i){ return rScale(maxValue*2.0) * Math.cos(angleSlice*i - Math.PI/2); })
-				.attr("y2", function(d, i){ return rScale(maxValue*2.0) * Math.sin(angleSlice*i - Math.PI/2); })
+				.attr("x2", function(d, i){ return rScale(maxValue*1.7) * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("y2", function(d, i){ return rScale(maxValue*1.7) * Math.sin(angleSlice*i - Math.PI/2); })
 				.style("stroke-opacity", "1");
 
 			d3.selectAll('.legend' + _this.id)
-				.transition().duration(2000)
-				.style("font-size", "8px");
+				.transition().duration(1000)
+				.attr("font-family", "HelveticaNeue-Light")
+				// .attr("transform", function(d) {return "rotate(-65)"}) 
+				.style("font-size", "12px");
 			
 			d3.selectAll(".radar" + _this.id)
 				.transition().duration(500)
-				.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)*2)
-				.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)*2);
+				.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)*1.7)
+				.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)*1.9);
 
 			d3.selectAll(".transformRadar" + _this.id)
 				.transition().duration(500)	
-				.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)*2) + "," + ((cfg.height/2 + cfg.margin.top)*2) + ")");
+				.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)*1.7) + "," + ((cfg.height/2 + cfg.margin.top)*1.9) + ")");
 			
 			d3.selectAll(".radarCircle" + _this.id)
 				.transition().duration(500)
-				.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
-				.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+				.attr("cx", function(d,i){ return rScale2[i](d.value)*1.7 * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("cy", function(d,i){ return rScale2[i](d.value)*1.7 * Math.sin(angleSlice*i - Math.PI/2); });
 			
 			d3.selectAll(".radarInvisibleCircle" + _this.id)
-			.attr("cx", function(d,i){ return rScale2[i](d.value)*2 * Math.cos(angleSlice*i - Math.PI/2); })
-			.attr("cy", function(d,i){ return rScale2[i](d.value)*2 * Math.sin(angleSlice*i - Math.PI/2); });
+				.attr("cx", function(d,i){ return rScale2[i](d.value)*1.7 * Math.cos(angleSlice*i - Math.PI/2); })
+				.attr("cy", function(d,i){ return rScale2[i](d.value)*1.7 * Math.sin(angleSlice*i - Math.PI/2); });
+
+			d3.selectAll(".radar" + _this.id)
+				.style("position", "absolute")
+				.style("top", "100px")
+				.style("left", "30%");
+				// .attr("transform", "translate(-50% , 0)");
+
+			d3.selectAll(".radarCircle" + _this.id)
+				.attr("r", 5.0)
+				.style("fill-opacity", 0.5);
+			
+			d3.selectAll(".radarInvisibleCircle" + _this.id)
+				.attr("r", 7.0)
 
 
-			} else if (isOn) {
+
+			} else if (this.isOn) {
 				console.log("Need to minimize last clicked obj");
-				
-				//var lastClickedId = lastClicked.id;
-				//console.log(lastClickedId);
 
-				isOn = false;
+				this.isOn = false;
 				
 				
 				d3.selectAll(".radarArea")
 					.transition().duration(500)
 					.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)/3); }))
 					.style("fill", "#fffcf6")
-					.style("fill-opacity", "0");
+					.style("fill-opacity", "0")
+					.style("stroke-width", "1px");
 
 				d3.selectAll('.gridCircle' + clickedObjId)
 					.transition().duration(500)
@@ -277,6 +307,40 @@ export default {
 					.transition().duration(500)	
 					.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3) + ")");
 				
+				d3.selectAll(".radar" + clickedObjId)
+					// .transition().duration(500)
+					.style("position", "relative")
+					.style("top", "0px")
+					.style("left", "0%");
+
+				// d3.selectAll(".radarCircle" + _this.id)
+				// 	.attr("r", 1.0)
+				// 	.style("fill-opacity", 0);
+
+				d3.selectAll(".radarCircle" + clickedObjId)
+					.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+					.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); })
+					.attr("r", 0)
+					.style("fill-opacity", 0);
+
+				d3.selectAll(".radarInvisibleCircle" + clickedObjId)
+					.attr("r", 0)
+					.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+					.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); });
+				
+				d3.selectAll(".line")
+					.transition().duration(200)
+					.attr("x2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.cos(angleSlice*i - Math.PI/2); })
+					.attr("y2", function(d, i){ return rScale(maxValue*1.0)/3 * Math.sin(angleSlice*i - Math.PI/2); })
+					.style("stroke-opacity", 0);
+
+				d3.selectAll(".radarCircle")
+					.attr("r", 0)
+					.style("fill-opacity", 0);
+				
+				// d3.selectAll(".line" + clickedObjId)
+				// 	.transition().duration(200)
+				// 	.style("stroke-opacity", 0);
 			
 			}
 
@@ -382,9 +446,9 @@ export default {
 	blobWrapper.selectAll(".radarCircle")
 		.data(function(d,i) { return d; })
 		.enter().append("circle")
-		.attr("class", "radarCircle" + _this.id)
+		.attr("class", "radarCircle" + _this.id + " radarCircle")
 		// .attr("r", cfg.dotRadius)
-		.attr("r", 4.0)
+		.attr("r", 0)
 		.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", function(d,i,j) { return cfg.color(j); })
@@ -403,7 +467,7 @@ export default {
 		.data(function(d,i) { return d; })
 		.enter().append("circle")
 		.attr("class", "radarInvisibleCircle" + _this.id)
-		.attr("r", cfg.dotRadius*3)
+		.attr("r", 0)
 		.attr("cx", function(d,i){ return rScale2[i](d.value)/3 * Math.cos(angleSlice*i - Math.PI/2); })
 		.attr("cy", function(d,i){ return rScale2[i](d.value)/3 * Math.sin(angleSlice*i - Math.PI/2); })
 		.style("fill", "none")
@@ -411,19 +475,44 @@ export default {
 		.on("mouseover", function(d,i) {
 			var newX =  parseFloat(d3.select(this).attr('cx'));
 			var newY =  parseFloat(d3.select(this).attr('cy'));
-					
+			
+			d3.selectAll(".radarCircle")
+				.transition().duration(200)
+				.attr("r", (k,p) => (p%data[0].length) == i ? 5:0)
+				.style("fill-opacity", 1.0);
+
+			d3.selectAll(".line")
+				.transition().duration(200)
+				.style("stroke-opacity", (k,p) => (p%data[0].length) == i ? 1:0);
+				// .attr("stroke-width", "10px")
+				// (k,p) => (p%data[0].length) == i ? 5:2);
+			
+			d3.selectAll('.line' + _this.id)
+				.transition().duration(100)
+				// .attr("x2", function(d, i){ return rScale(maxValue*2.0) * Math.cos(angleSlice*i - Math.PI/2); })
+				// .attr("y2", function(d, i){ return rScale(maxValue*2.0) * Math.sin(angleSlice*i - Math.PI/2); })
+				.style("stroke-opacity", "1");
+			
+			d3.selectAll('.legend' + _this.id)
+				.transition().duration(200)
+				.style("fill", (k,p) => (p%data[0].length) == i ? "black":"gray")
+				.attr("font-weight", (k,p) => (p%data[0].length) == i ? "bold":"")
+				.style("font-size", (k,p) => (p%data[0].length) == i ? "13px":"9px");
+
+
 			tooltip
-				.attr('x', newX+5)
+				.attr('x', newX+12)
 				.attr('y', newY+5)
 				.text(d.rank)
-				.attr("font-family", "sans-serif")
-      			.attr("font-size", 10)
-				.transition().duration(200)
+				.attr("font-family", "HelveticaNeue-Light")
+				.attr("font-weight", "bold")
+      			.attr("font-size", 17)
+				.transition().duration(100)
 				.style('opacity', 1);
 		})
 		.on("mouseout", function(){
-			tooltip.transition().duration(200)
-				.style("opacity", 0);
+			// tooltip.transition().duration(200)
+			// 	.style("opacity", 0);
 		});
 		
 	//Set up the small tooltip for when you hover over a circle
@@ -494,5 +583,9 @@ export default {
 <style scoped>
 /* svg text{
 	font-size:5px
+} */
+
+/* .legend5{
+	transform: rotate(-90deg);
 } */
 </style>
