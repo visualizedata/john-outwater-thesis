@@ -38,8 +38,11 @@
           <!-- <radial :allData="radialData"/> -->
       </div>  
       </div>
-          <div class ="bar_graph">
+      <div class ="bar_graph">
           <bar />
+      </div>
+      <div class ="bar2_graph">
+          <bar2 />
       </div>
   </div>
 </template>
@@ -49,13 +52,16 @@ import landing from '~/components/Logo.vue'
 import triangle from '~/components/triangle_scroll.vue'
 import scrolly from '~/components/scrolly.vue'
 import scrolly2 from '~/components/scrolly2.vue'
-import bar from '~/components/bar.vue'
 import radial from '~/components/radial.vue'
 import radialData from "~/assets/radialBerry.json"
+import bar from '~/components/bar.vue'
+import bar2 from '~/components/bar2.vue'
+// import berryData from "~/assets/berry.csv"
 export default {
   data(){
     return{
       radialData:radialData
+      // berryData:berryData
     }
   },
   components: {
@@ -63,9 +69,10 @@ export default {
     triangle,
     scrolly,
     scrolly2,
-    bar,
     radial,
-    radialData
+    radialData,
+    bar,
+    bar2
   }
 }
 

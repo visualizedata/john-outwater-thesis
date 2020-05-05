@@ -1,5 +1,22 @@
 <template>
   <div id="bar">
+    <el-row class="block-col-2">
+  <el-col :span="12">
+    <span class="demonstration">click to trigger</span>
+    <el-dropdown trigger="click">
+      <span class="el-dropdown-link">
+        Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item icon="el-icon-plus">Action 1</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus">Action 2</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-plus-outline">Action 3</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-check">Action 4</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-circle-check">Action 5</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+  </el-col>
+</el-row>
     <div id="center">
       <h3>{{ chartTitle }}</h3>
       <div>

@@ -64,6 +64,12 @@ export default {
 					"GR207.677"
 					];
 
+let arrayLength = varietyName.length;
+for(let i = 0 ; i < arrayLength; i++) {
+    
+   let val = varietyName[i];
+}
+
 	
 	
 	//Put all of the options into a variable called cfg
@@ -80,11 +86,11 @@ export default {
 	  for(var i=0; i<this.allData[0].length; i++){
 	    extent_Value.push(d3.extent(this.allData.map(d => d[i].value)));
 	  };
-	  console.log(extent_Value)
+	//   console.log(extent_Value)
 
 	//If the supplied maxValue is smaller than the actual one, replace by the max in the data
 	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){return d3.max(i.map(function(o){return o.value;}))}));
-		console.log(maxValue);
+		// console.log(maxValue);
 	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
 		// allValue = (data[0].map(function(n, t){return n.value})),
 		total = allAxis.length,					//The number of different axes
@@ -92,7 +98,7 @@ export default {
 		Format = d3.format('%'),			 	//Percentage formatting
 		angleSlice = Math.PI * 2 / total;		//The width in radians of each "slice"
 		
-		console.log(radius);
+		// console.log(radius);
 	
 	//Scale for the radius
 	var rScale = d3.scaleLinear()
@@ -107,20 +113,24 @@ export default {
 	//Remove whatever chart with the same id/class was present before
 	d3.select('#radial-'+this.id).select("svg").remove();
 	
+	var h2 = d3.select('#radial-'+this.id).append("h2")
+			.attr("class", "variety" + _this.id + " variety")
+			.text(varietyName[this.id])
+			.style("font-family", 'DM Serif Display')
+			.style("font-size", "22px")
+			.style("-webkit-text-fill-color", "#0b4780");
+
 	//Initiate the radar chart SVG
 	var svg = d3.select('#radial-'+this.id).append("svg")
-			// .attr("width",  "880")
-			// .attr("height", "800")
 			.style("position", "relative")
 			.style("top", "0px")
 			.style("left", "0%")
 			.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)/3)
-			.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3)
+			.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3.5)
 			.attr("class", "radar" + _this.id);
-			// .attr("class", "radar"+id + _this.id);
 	//Append a g element		
 	var g = svg.append("g")
-			.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3) + ")")
+			.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3.5) + ")")
 			.attr("class", "transformRadar" + _this.id);
 	//Filter for the outside glow
 	var filter = g.append('defs').append('filter').attr('id','glow'),
@@ -129,6 +139,12 @@ export default {
 		feMergeNode_1 = feMerge.append('feMergeNode').attr('in','coloredBlur'),
 		feMergeNode_2 = feMerge.append('feMergeNode').attr('in','SourceGraphic');
 
+	var h4 = d3.select('#radial-'+this.id).append("h4")
+			.attr("class", "rank" + _this.id + " rank")
+			.text("")
+			.attr("font-family", "HelveticaNeue-Light")
+			.style("font-size", "13px")
+			.style("-webkit-text-fill-color", "black");
 	//Draw the Circular grid//
 	//Wrapper for the grid & axes
 	var axisGrid = g.append("g").attr("class", "axisWrapper");
@@ -234,16 +250,18 @@ export default {
 			d3.selectAll('.legend' + _this.id)
 				.transition().duration(1000)
 				.attr("font-family", "HelveticaNeue-Light")
+				// .style("font-weight", "bold")
 				// .attr("transform", function(d) {return "rotate(-65)"}) 
+				.style("fill", "black")
 				.style("font-size", "12px");
 			
 			d3.selectAll(".radar" + _this.id)
-				.transition().duration(500)
+				.transition().duration(0)
 				.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)*1.7)
 				.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)*1.9);
 
 			d3.selectAll(".transformRadar" + _this.id)
-				.transition().duration(500)	
+				.transition().duration(0)	
 				.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)*1.7) + "," + ((cfg.height/2 + cfg.margin.top)*1.9) + ")");
 			
 			d3.selectAll(".radarCircle" + _this.id)
@@ -255,9 +273,18 @@ export default {
 				.attr("cx", function(d,i){ return rScale2[i](d.value)*1.7 * Math.cos(angleSlice*i - Math.PI/2); })
 				.attr("cy", function(d,i){ return rScale2[i](d.value)*1.7 * Math.sin(angleSlice*i - Math.PI/2); });
 
-			d3.selectAll(".radar" + _this.id)
+			d3.selectAll(".variety" + _this.id)
+				.transition().duration(0)
 				.style("position", "absolute")
-				.style("top", "100px")
+				.style("top", "170px")
+				.style("left", "25%")
+				.style("font-size", "50px");
+				// .attr("transform", "translate(0px , 200px)");
+
+			d3.selectAll(".radar" + _this.id)
+				.transition().duration(0)
+				.style("position", "absolute")
+				.style("top", "130px")
 				.style("left", "30%");
 				// .attr("transform", "translate(-50% , 0)");
 
@@ -266,7 +293,10 @@ export default {
 				.style("fill-opacity", 0.5);
 			
 			d3.selectAll(".radarInvisibleCircle" + _this.id)
-				.attr("r", 7.0)
+				.attr("r", 9.0)
+
+			d3.selectAll(".tooltip")
+					.style("font-size", "17px");
 
 
 
@@ -281,6 +311,7 @@ export default {
 					.attr("d", radarLine.radius(function(d,i) { return (rScale2[i](d.value)/3); }))
 					.style("fill", "#fffcf6")
 					.style("fill-opacity", "0")
+					.style("stroke-opacity", 1.0)
 					.style("stroke-width", "1px");
 
 				d3.selectAll('.gridCircle' + clickedObjId)
@@ -294,18 +325,33 @@ export default {
 					.attr("y2", function(d, i){ return rScale(maxValue/3) * Math.sin(angleSlice*i - Math.PI/2); })
 					.style("stroke-opacity", "0");
 				
-				d3.selectAll('.legend' + clickedObjId)
+				d3.selectAll('.legend')
 					.transition().duration(0)
+					// .attr("font-family", "HelveticaNeue-Light")
+					// .style("font-weight", "normal")
+					// .style("font-size", "5px")
+					// .attr("text-anchor", "middle")
+					// .attr("dy", "0.35em")
+					// .attr("x", function(d, i){ return rScale(2.0*maxValue) * Math.cos(angleSlice*i - Math.PI/2); })
+					// .attr("y", function(d, i){ return rScale(2.0*maxValue) * Math.sin(angleSlice*i - Math.PI/2); })
+					// .text(function(d){return d})
 					.style("font-size", "0px");
+				
+				d3.selectAll(".variety" + clickedObjId)
+					.transition().duration(500)
+					.style("position", "relative")
+					.style("top", "0px")
+					.style("left", "0%")
+					.style("font-size", "22px");
 
 				d3.selectAll(".radar" + clickedObjId)
 					.transition().duration(500)
 					.attr("width",  (cfg.width + cfg.margin.left + cfg.margin.right)/3)
-					.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3);
+					.attr("height", (cfg.height + cfg.margin.top + cfg.margin.bottom)/3.5);
 
 				d3.selectAll(".transformRadar" + clickedObjId)
 					.transition().duration(500)	
-					.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3) + ")");
+					.attr("transform", "translate(" + ((cfg.width/2 + cfg.margin.left)/3) + "," + ((cfg.height/2 + cfg.margin.top)/3.5) + ")");
 				
 				d3.selectAll(".radar" + clickedObjId)
 					// .transition().duration(500)
@@ -337,6 +383,12 @@ export default {
 				d3.selectAll(".radarCircle")
 					.attr("r", 0)
 					.style("fill-opacity", 0);
+				
+				d3.selectAll(".tooltip")
+					.style("font-size", "0px");
+				
+				d3.selectAll(".rank")
+					.text("");
 				
 				// d3.selectAll(".line" + clickedObjId)
 				// 	.transition().duration(200)
@@ -481,11 +533,15 @@ export default {
 				.attr("r", (k,p) => (p%data[0].length) == i ? 5:0)
 				.style("fill-opacity", 1.0);
 
+			d3.selectAll(".rank")
+				.text((k,p) => _this.allData[p][i].rank);
+
+			d3.selectAll(".rank" + _this.id)
+				.text("");
+
 			d3.selectAll(".line")
 				.transition().duration(200)
 				.style("stroke-opacity", (k,p) => (p%data[0].length) == i ? 1:0);
-				// .attr("stroke-width", "10px")
-				// (k,p) => (p%data[0].length) == i ? 5:2);
 			
 			d3.selectAll('.line' + _this.id)
 				.transition().duration(100)
@@ -497,12 +553,14 @@ export default {
 				.transition().duration(200)
 				.style("fill", (k,p) => (p%data[0].length) == i ? "black":"gray")
 				.attr("font-weight", (k,p) => (p%data[0].length) == i ? "bold":"")
-				.style("font-size", (k,p) => (p%data[0].length) == i ? "13px":"9px");
+				.style("font-size", (k,p) => (p%data[0].length) == i ? "13px":"10px");
 
+			d3.selectAll('.radarArea' + _this.id)
+				.style("stroke-opacity", 0);
 
 			tooltip
-				.attr('x', newX+12)
-				.attr('y', newY+5)
+				.attr('x', newX-15)
+				.attr('y', newY-8)
 				.text(d.rank)
 				.attr("font-family", "HelveticaNeue-Light")
 				.attr("font-weight", "bold")
@@ -519,7 +577,6 @@ export default {
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
 		.style("opacity", 0);
-	
 	
 
 	//HELPER FUNCTION//
