@@ -36,13 +36,13 @@
           :id="i" 
           :allData="radialData"/>
           <!-- <radial :allData="radialData"/> -->
-      </div>  
-      </div>
-      <div class ="bar_graph">
+      </div> 
+      <!-- <div class ="bar_graph">
           <bar />
-      </div>
+      </div> -->
       <div class ="bar2_graph">
           <bar2 />
+      </div>
       </div>
   </div>
 </template>
@@ -79,12 +79,16 @@ export default {
 </script>
 
 <style>
+
+body{
+  background-color: #fffcf6;
+}
+
 .container {
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #fffcf6;
 }
 
 .title span {
@@ -123,9 +127,13 @@ export default {
   padding-top: 0px;
 }
 
-.bar_graph {
+.bar2_graph {
   justify-content: center;
   align-items: center;
+}
+
+.variety{
+  letter-spacing: 1.7px;
 }
 
 .radial_chart {
