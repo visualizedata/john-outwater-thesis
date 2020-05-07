@@ -1,7 +1,15 @@
 <template>
-    <div>
-    <h4 id="dropTitle">Select Category:</h4>
-    <div id="drop"></div>
+    <div class="ultimate">
+    <!-- <h4 id="dropTitle">Select Category:</h4> -->
+    <div class="drop"></div>
+    <el-select id="newDrop" v-model="selectedValue" placeholder="Select" @change="updateBars">
+    <el-option
+      v-for="item in dropdownOptions"
+      :key="item"
+      :label="item"
+      :value="item">
+    </el-option>
+  </el-select>
     </div>
 </template>
 
@@ -12,7 +20,9 @@ export default {
   name: 'bar2',
   data() {
       return{
-          berryData:[]
+          berryData:[],
+          dropdownOptions:[],
+          selectedValue:""
 	};
 	
   },
@@ -40,8 +50,8 @@ drawBars(){
     console.log(this.berryData);
 
     var margin = {top: 80, right: 180, bottom: 80, left: 180},
-        width = 1200 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+        width = 1300 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
 
     var svg = d3.select(".bar2_graph").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -56,7 +66,10 @@ drawBars(){
 	var elements = Object.keys(data[0])
 		.filter(function(d){
 			return (d != "sample_name2");
-		});
+        });
+        
+    this.dropdownOptions = elements;
+
 	var selection = elements[0];
 
 	var y = d3.scaleLinear()
@@ -70,7 +83,7 @@ drawBars(){
 
 	var xAxis = d3.axisBottom()
         .scale(x)
-        .tickSize(-350)
+        .tickSize(-550)
         .tickSizeOuter(0); 
 
 	var yAxis = d3.axisLeft()
@@ -83,7 +96,7 @@ drawBars(){
     	.selectAll("text")
     	.style("font-size", "15px")
         .style("text-anchor", "end")
-        .style("font-family", "HelveticaNeue-Light")
+        .style("font-family", "DM Serif Display")
         .style("font-weight", "bold")
         .style("fill", "#0b4780")
         .style("letter-spacing", "1.7px")
@@ -112,14 +125,45 @@ drawBars(){
 		.text(function(d){
 			return d.sample_name2 + " : " + d[selection];
 		});
+},
 
-var selector = d3.select("#drop")
-    	.append("select")
-    	.attr("id","dropdown")
-    	.on("change", function(d){
-        	selection = document.getElementById("dropdown");
+updateBars(){
 
-        	y.domain([d3.min(data, function(d){return +d[selection.value];})*(0.1), d3.max(data, function(d){return +d[selection.value];})]);
+console.log("running");
+
+var margin = {top: 80, right: 180, bottom: 80, left: 180},
+        width = 1300 - margin.left - margin.right,
+        height = 800 - margin.top - margin.bottom;
+
+var data = this.berryData;
+
+let _this=this;
+
+	var y = d3.scaleLinear()
+			.domain([d3.min(data, function(d){return +d[_this.selectedValue];})*(0.1), d3.max(data, function(d){return +d[_this.selectedValue];})])
+			.range([height, 100]);
+
+	var x = d3.scaleBand()
+			.domain(data.map(function(d){ return d.sample_name2;}))
+			.range([0, width]);
+
+
+	var xAxis = d3.axisBottom()
+        .scale(x)
+        .tickSize(-350)
+        .tickSizeOuter(0); 
+
+	var yAxis = d3.axisLeft()
+		.scale(y);
+
+// var selector = d3.select("#newDrop")
+//     	// .append("select")
+//     	// .attr("id","dropdown")
+//     	.on("change", function(d){
+//             console.log("change")
+//         	selection = document.getElementById("newDrop");
+
+        	y.domain([d3.min(data, function(d){return +d[_this.selectedValue];})*(0.1), d3.max(data, function(d){return +d[_this.selectedValue];})]);
 
         	yAxis.scale(y);
 
@@ -128,33 +172,34 @@ var selector = d3.select("#drop")
            		// .duration(2000)
                 // .ease("bounce")
 	            .attr("cy", function(d){
-					return y(+d[selection.value]);
+					return y(+d[_this.selectedValue]);
 				})
 				.attr("cx", function(d, i){
 					return ((width / data.length) * i)+((width / data.length)/2) ;
 				})
            		.select("title")
            		.text(function(d){
-           			return d.sample_name2 + " : " + d[selection.value];
+           			return d.sample_name2 + " : " + d[_this.selectedValue];
            		});
       
            	d3.selectAll("g.y.axis")
            		.transition()
            		.call(yAxis);
 
-         });
+        //  });
 
-    selector.selectAll("option")
-      .data(elements)
-      .enter().append("option")
-      .attr("text", function(d){
-        return d;
-      })
-      .text(function(d){
-        return d;
-      })
-    //   .style("font-family", "HelveticaNeue-Light")
+    // selector.selectAll("option")
+    //   .data(elements)
+    //   .enter().append("option")
+    //   .attr("text", function(d){
+    //     return d;
+    //   })
+    //   .text(function(d){
+    //     return d;
+    //   })
+
   }
+
 }
 
 }
@@ -162,13 +207,17 @@ var selector = d3.select("#drop")
 
 <style>
 
-#drop{
+.ultimate{
+    text-align: left;
+    align-content: left;
+    justify-content: left;
+    margin-top: 20rem;
+    margin-left: 10rem;
+}
+
+.drop{
     font-family: "HelveticaNeue-Light";
     background-color: #fffcf6;
-    display: flex;
-    align-content: left;
-    margin-left: 10%;
-
 }
 
 #dropTitle{
@@ -177,12 +226,9 @@ var selector = d3.select("#drop")
     display: flex;
     align-content: left;
     margin-left: 10%;
+    padding-top: 200px;
     padding-bottom: 10px;
 }
-
-/* #dropdown{
-      left: 500px;
-} */
 
 .svgBar{
     justify-content: center;
@@ -198,10 +244,6 @@ var selector = d3.select("#drop")
 	fill: white;
 }
 
-option{
-    font-family:"HelveticaNeue-Light"
-}
-
 line {
     fill: lightgray;
 }
@@ -215,4 +257,26 @@ line {
   shape-rendering: crispEdges;
 }
 
+span{
+    font-family: "HelveticaNeue";
+    font-size: 12px;
+    -webkit-text-fill-color: #000000;
+}
+
+.el-select-dropdown__item {
+    height: 25px;
+    line-height: 25px;
+}
+
+.el-select-dropdown__wrap {
+    max-height: 718px;
+}
+
+.el-scrollbar__view{
+    height: 718px;
+}
+
+.el-select-dropdown__list{
+    height: 718px;
+}
 </style>

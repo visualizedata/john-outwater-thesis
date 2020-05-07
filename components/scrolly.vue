@@ -10,8 +10,16 @@
         :data-step-id="step.id"
         class="step" :class="{'is-active': step.id === currStepId}">
         <h2 class="scroll_title">{{step.title}}</h2>
-        <p class="text">{{step.text}}</p>
-      </div>
+        <p class="text_wrapper">
+        <span class="text_normal">{{step.text}}</span>
+        <span class="text_high_bold">{{step.text2}}</span>
+        <span class="text_normal">{{step.text3}}</span>
+        <span class="text_high_bold">{{step.text4}}</span>
+        <span class="text_normal">{{step.text5}}</span>
+        <span class="text_high_bold">{{step.text6}}</span>
+        <span class="text_normal">{{step.text7}}</span>
+        </p>
+        </div>
     </Scrollama>
     </client-only>
   </div>
@@ -29,9 +37,9 @@ export default {
     return {
       currStepId: 1,
       steps: [
-        {id: '1', title: "Appearance and Expectation", text: "Using vision to understand our food is one of the first interactions we have in the process of food consumption. In these situations, we judge if we want to consume a food or not, and sometimes we even ponder how good the food will taste based on its appearance. We are setting positive or negative expectations as we take a momentary but highly crucial and instinctual glance at the food prior to eating. Our pupils, irises, retinas and brain are an incredible system that can analyze very minute details in the texture and color of our environment, especially when we hold up food items close to our eyes. We possess information and experiences in our brains that relate our visual perception to what we have seen in the past and what we have learned as comparatively regular or irregular in appearance. Therefore, our eyes are the first step in building comprehensive flavor perception.", image: "./flav_eye.png"},
-        {id: '2', title: "Taste Transduction",text: "Our mouths are one of the many sense organs in our bodies. It is of especially high significance as it is one of the pathways through which we breathe and it transforms products of the external world to digestible matter. During this transition point from external to internal, we use the tongue in our mouths to sense the taste and touch (mouth feel) of potentially ingestible food for our bodies. The moment food touches our tongue, receptors pass messages to the brain, giving us an understanding of whether the food is safe to eat and, furthermore, what the food is generally composed of. The tongue is able to sense five distinct tastes: sweet, sour, salt, bitter, and umami. These tastes are all sensed and transduced to the brain by taste receptor cells  located within various papillae along the tongue’s surface. Collectively, the TRCs start to build a perception of flavor during a consumption experience.", image: "./flav_mouth.png"},
-        {id: '3', title: "Retronasal Flow",text: "The nose is a sensory organ that has also adapted in different ways from our early existence as humans. While this evolution and adaptation was occuring, our keen sense of smell transitioned from orthonasal smell to retronasal smell, which originates from our mouths through the back-end of our nasal cavity. When a piece of edible matter enters the mouth, the retronasal sense engages almost immediately. As one chews food and breathes, small whiffs of the food are transported from the back of the mouth up to the retronasal passage as a primer. When the food is swallowed, a natural breath-out allows a more intense experience of the food’s odor retronasally, where hundreds of volatile compounds can be translated and visualized by way of the olfactory bulb. This moment in consumption is when one experiencing food will have the most wholesome understanding of the food’s flavor.", image: "./flav_nasal.png"}
+        {id: '1', title: "Appearance and Expectation", text: "Seeing our food is one of the first interactions we have in the process of food consumption.", text2: " Using our eyes, we judge our food", text3: " and decide whether or not we should eat it. Sometimes we even ponder how good the food will taste based on its appearance.", text4: " We set specific expectations", text5: "as we take a momentary but highly crucial and instinctual glance at the food prior to eating. Our pupils, irises, retinas and brain are an incredible system that can analyze very minute details in the texture, color, and shape of our environment, and we use this daily in analyzing the appearance of our food. In this process,", text6: "we can relate our immediate visual perception to what we have seen in the past", text7: "and what has been learned as regular or irregular in appearance. Therefore, our eyes are the first step in building comprehensive flavor perception.", image: "./flav_eye.png"},
+        {id: '2', title: "Taste Transduction",text: "Our mouths are one of the many sense organs in our bodies. It is of especially high significance as it is one of the pathways through which we breathe and it transforms products of the external world to digestible matter. During this transition point from external to internal,", text2: "we use the tongue in our mouths to sense the taste and feel", text3: "of potentially ingestible food for our bodies. Once food touches our tongue,", text4: "receptors pass messages to the brain, giving us an understanding of the food,", text5: "whether or not it is safe to eat and, furthermore, what the food is generally composed of.", text6: "The tongue is able to sense five distinct tastes: sweet, sour, salt, bitter, and umami.", text7: "These tastes are all sensed and transduced to the brain by taste receptor cells  located within various papillae along the tongue’s surface. Collectively, the TRCs start to build a perception of flavor during a consumption experience.", image: "./flav_mouth.png"},
+        {id: '3', title: "Retronasal Flow",text: "The nose is a sensory organ that has also adapted in different ways from our early existence as humans.", text2: "During evolution, our keen sense of smell transitioned from orthonasal to retronasal,", text3: "which originates from our mouths through the back-end of our nasal cavity. When a piece of edible matter enters the mouth, the retronasal sense engages almost immediately. As one chews food and breathes, small whiffs of the food are transported from the back of the mouth up to the retronasal passage as a primer.", text4: "When food is swallowed, a natural breath-out allows for an intense experience of the food’s odor retronasally,", text5: "where hundreds of volatile compounds can be translated and visualized by way of the olfactory bulb. This moment in consumption is when one experiencing food will have the most wholesome understanding of the food’s flavor.", image: "./flav_nasal.png"}
       ]
     }
   },
@@ -65,8 +73,8 @@ export default {
 <style scoped>
 .step {
   width: 100%;
-  padding: 4rem 0;
-  margin: 5rem 0rem 15rem;
+  padding: 15rem 3rem;
+  margin: 5rem 4rem 15rem;
   /* border: 1px solid #0b4780;
   background-color: white; */
   display: block;
@@ -85,14 +93,26 @@ export default {
   text-align: left;
 }
 
-.text {
-  font-family: 'HelveticaNeue-Light';
-  /* font-style: "Light"; */
-  font-weight: 400;
-  font-size: 17px;
-  padding: 0 3rem 0;
+.text_wrapper{
+  margin-left: 3rem;
+  margin-right: 3rem;
   text-align: justify;
   text-justify: inter-word;
+}
+
+.text_normal {
+  font-family: 'HelveticaNeue-Light';
+  -webkit-text-fill-color: #000000;
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.text_high_bold{
+  font-family: 'HelveticaNeue';
+  -webkit-text-fill-color: #0b4780;
+  background-color: rgba(11, 71, 128, 0.2);
+  font-weight: 500;
+  font-size: 17px;
 }
 .graphic {
   height: 80vh;

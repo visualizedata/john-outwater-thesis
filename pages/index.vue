@@ -14,21 +14,24 @@
         <triangle />
       </div>
       <div class="icon_scroll"></div>
-      <article>
+      <!-- <article class="section_break">
         <h3 class="flavor_title">Is flavor quantifiable?</h3>
             <div class="flavor_text">Human food consumption - A daily necessity and primal, sensory experience. Our sensory systems have evolved greatly over time, allowing us to perceive flavor more effectively than any other organism. This ability allows us to recall and associate specific emotions with flavor experiences, making food an important part of our lives both physically and mentally. Using sensory data from an agriculture business specialized in growing berries, we will explore the sensory experience of blueberry consumption in an effort to quantify the qualitative components of the process and find patterns in flavor and quality. The goal of this research and berry flavor visualization is to create an analytical and comprehensive flavor data tool that will offer new insights in berry sensory analysis. This project is designed not only for agricultural specialists focused on berry cultivation but audience members of all types. The project will inform the audience of the meticulous measures taken in analyzing berry flavor and the visual potential that can be leveraged for communication of such subjective data. Furthermore, this project is meant to promote conscious nourishment and highlight the momentary beauty of food consumption during our busy, fast-paced lives.
           </div>
-      </article>
+      </article> -->
       <div class="sensory_scroll">
           <scrolly />
       </div>
-      <article class="breeding_text">
+      <!-- <article class="section_break">
         <h3 class="flavor_title">Creation of the perfect blueberry</h3>
           <div class="flavor_text">Human food consumption - A daily necessity and primal, sensory experience. Our sensory systems have evolved greatly over time, allowing us to perceive flavor more effectively than any other organism. This ability allows us to recall and associate specific emotions with flavor experiences, making food an important part of our lives both physically and mentally. Using sensory data from an agriculture business specialized in growing berries, we will explore the sensory experience of blueberry consumption in an effort to quantify the qualitative components of the process and find patterns in flavor and quality. The goal of this research and berry flavor visualization is to create an analytical and comprehensive flavor data tool that will offer new insights in berry sensory analysis. This project is designed not only for agricultural specialists focused on berry cultivation but audience members of all types. The project will inform the audience of the meticulous measures taken in analyzing berry flavor and the visual potential that can be leveraged for communication of such subjective data. Furthermore, this project is meant to promote conscious nourishment and highlight the momentary beauty of food consumption during our busy, fast-paced lives.
           </div>
-      </article>
+      </article> -->
       <div class="breeding_scroll">
           <scrolly2 />
+      </div>
+      <div class ="bar2_graph">
+          <bar2 />
       </div>
       <div class ="radial_chart">
           <radial v-for="(variety,i) in radialData" 
@@ -37,12 +40,6 @@
           :allData="radialData"/>
           <!-- <radial :allData="radialData"/> -->
       </div> 
-      <!-- <div class ="bar_graph">
-          <bar />
-      </div> -->
-      <div class ="bar2_graph">
-          <bar2 />
-      </div>
       </div>
   </div>
 </template>
@@ -111,7 +108,7 @@ body{
   -webkit-text-fill-color: #0b4780;
   -webkit-text-stroke-width: 0px;
   letter-spacing: 1px;
-  padding-top: 50px;
+  padding-top: 150px;
   padding-bottom: 0px;
 }
 
@@ -201,6 +198,10 @@ body{
   animation-name: scroll;
 }
 
+.section_break{
+  padding: 0rem 0rem 15rem;
+}
+
 .flavor_title{
   font-family: 'DM Serif Display';
   font-weight: 400;
@@ -223,7 +224,7 @@ body{
 
 .sensory_scroll{
   padding-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 600px;
 }
 
     @keyframes scroll {
