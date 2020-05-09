@@ -3,8 +3,8 @@
 
 ![](preview.png)
 
-Author: John Outwater
-project URL: https://joutwater.github.io/jo_berry_code/#/
+Author: John Outwater  
+Project URL: https://joutwater.github.io/jo_berry_code/#/
 
 ### Abstract
 
