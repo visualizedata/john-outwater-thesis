@@ -212,7 +212,7 @@ let _this=this;
     align-content: left;
     justify-content: left;
     margin-top: 20rem;
-    margin-left: 10rem;
+    margin-left: 20rem;
 }
 
 .drop{
