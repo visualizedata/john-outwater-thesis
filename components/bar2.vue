@@ -50,7 +50,7 @@ drawBars(){
     console.log(this.berryData);
 
     var margin = {top: 80, right: 180, bottom: 80, left: 180},
-        width = 1300 - margin.left - margin.right,
+        width = 1675 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
     var svg = d3.select(".bar2_graph").append("svg")
@@ -59,7 +59,7 @@ drawBars(){
         .attr("class", "svgBar")
         .style("position", "relative")
         .style("top", "0px")
-        .style("left", "15%")
+        .style("left", "10%")
         .append("g");
         // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -94,7 +94,7 @@ drawBars(){
     	.attr("transform", "translate(0," + height + ")")
     	.call(xAxis)
     	.selectAll("text")
-    	.style("font-size", "15px")
+    	.style("font-size", "17px")
         .style("text-anchor", "end")
         .style("font-family", "DM Serif Display")
         .style("font-weight", "bold")
@@ -109,16 +109,19 @@ drawBars(){
     	.attr("class", "y axis")
     	.call(yAxis);
 
-	svg.selectAll("circle")
+	svg.selectAll("image")
 		.data(data)
 		.enter()
-		.append("circle")
-		.attr("class","circle")
-		.attr("r", (width/data.length)/6.0)
-		.attr("cx", function(d, i){
-			return ((width / data.length) * i)+((width / data.length)/2) ;
-		})
-		.attr("cy", function(d){
+		.append("image")
+        .attr("class","berry_img")
+        .attr("xlink:href", (d,i) => "b" + (i+1) + ".png")
+        .attr("width", 80)
+        .attr("height", 80)
+		// .attr("r", (width/data.length)/6.0)
+		.attr("x", function(d, i){
+			return (((width / data.length) * i)+((width / data.length)/2)-40) ;
+        })
+		.attr("y", function(d){
 			return y(+d[selection]);
 		})
 		.append("title")
@@ -132,7 +135,7 @@ updateBars(){
 console.log("running");
 
 var margin = {top: 80, right: 180, bottom: 80, left: 180},
-        width = 1300 - margin.left - margin.right,
+        width = 1675 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
 var data = this.berryData;
@@ -140,8 +143,8 @@ var data = this.berryData;
 let _this=this;
 
 	var y = d3.scaleLinear()
-			.domain([d3.min(data, function(d){return +d[_this.selectedValue];})*(0.1), d3.max(data, function(d){return +d[_this.selectedValue];})])
-			.range([height, 100]);
+			.domain([d3.min(data, function(d){return +d[_this.selectedValue];}), d3.max(data, function(d){return +d[_this.selectedValue];})])
+			.range([height-80, 120]);
 
 	var x = d3.scaleBand()
 			.domain(data.map(function(d){ return d.sample_name2;}))
@@ -163,19 +166,19 @@ let _this=this;
 //             console.log("change")
 //         	selection = document.getElementById("newDrop");
 
-        	y.domain([d3.min(data, function(d){return +d[_this.selectedValue];})*(0.1), d3.max(data, function(d){return +d[_this.selectedValue];})]);
+        	y.domain([d3.min(data, function(d){return +d[_this.selectedValue];}), d3.max(data, function(d){return +d[_this.selectedValue];})]);
 
         	yAxis.scale(y);
 
-            d3.selectAll(".circle")
+            d3.selectAll(".berry_img")
                 .transition()
            		// .duration(2000)
                 // .ease("bounce")
-	            .attr("cy", function(d){
+	            .attr("y", function(d){
 					return y(+d[_this.selectedValue]);
 				})
-				.attr("cx", function(d, i){
-					return ((width / data.length) * i)+((width / data.length)/2) ;
+				.attr("x", function(d, i){
+					return (((width / data.length) * i)+((width / data.length)/2)-40) ;
 				})
            		.select("title")
            		.text(function(d){
@@ -212,7 +215,7 @@ let _this=this;
     align-content: left;
     justify-content: left;
     margin-top: 20rem;
-    margin-left: 20rem;
+    margin-left: 7rem;
 }
 
 .drop{
@@ -257,13 +260,16 @@ line {
   shape-rendering: crispEdges;
 }
 
-span{
+/* span{
     font-family: "HelveticaNeue";
     font-size: 12px;
     -webkit-text-fill-color: #000000;
-}
+} */
 
 .el-select-dropdown__item {
+    font-family: "HelveticaNeue";
+    font-size: 12px;
+    -webkit-text-fill-color: #000000;
     height: 25px;
     line-height: 25px;
 }

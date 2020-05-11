@@ -34,12 +34,20 @@
           <bar2 />
       </div>
       <div class ="radial_chart">
+          <!-- <radialBack /> -->
           <radial v-for="(variety,i) in radialData" 
           :key="i" 
           :id="i" 
           :allData="radialData"/>
           <!-- <radial :allData="radialData"/> -->
-      </div> 
+      </div>
+      <div class="footer">
+        <radialBack />
+        <div class="footer_text">
+        <span><b>Thank you</b></span>
+        <span>: Daniel Sauter, Aaron Hill, Neil Oliver, Marisa Asari, Henry Yeung, and Brie Smith</span>
+        </div>
+      </div>
       </div>
   </div>
 </template>
@@ -51,7 +59,7 @@ import scrolly from '~/components/scrolly.vue'
 import scrolly2 from '~/components/scrolly2.vue'
 import radial from '~/components/radial.vue'
 import radialData from "~/assets/radialBerry.json"
-import bar from '~/components/bar.vue'
+import radialBack from '~/components/radial_background.vue'
 import bar2 from '~/components/bar2.vue'
 // import berryData from "~/assets/berry.csv"
 export default {
@@ -68,7 +76,7 @@ export default {
     scrolly2,
     radial,
     radialData,
-    bar,
+    radialBack,
     bar2
   }
 }
@@ -91,32 +99,29 @@ body{
 .title span {
   font-family: 'DM Serif Display';
   font-weight: 300;
-  font-size: 120px;
+  font-size: 170px;
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #0b4780;
   stroke-width: 5px;
   letter-spacing: 1px;
-  padding-top: 30px;
-  padding-bottom: 30px;
 }
 
 .title {
   font-family: 'DM Serif Display';
   font-weight: 300;
-  font-size: 120px;
+  font-size: 170px;
   -webkit-text-fill-color: #0b4780;
   -webkit-text-stroke-width: 0px;
   letter-spacing: 1px;
-  padding-top: 150px;
-  padding-bottom: 0px;
+  margin-top: 30px
 }
 
 .subtitle {
   font-family: 'DM Serif Display';
   font-style: italic;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 33px;
   -webkit-text-fill-color: #0b4780;
   letter-spacing: 1px;
   word-spacing: 10px;
@@ -127,6 +132,7 @@ body{
 .bar2_graph {
   justify-content: center;
   align-items: center;
+  margin-bottom: 300px; 
 }
 
 .variety{
@@ -139,7 +145,7 @@ body{
  display: flex;
  /* flex-wrap: wrap; */
  bottom: 0px;
- margin-top: 300px;
+ margin-top: 50px;
  padding-bottom: 300px;
  /* align-content: space-between; */
  justify-content: center;
@@ -190,8 +196,8 @@ body{
   width: 5px;
   height: 5px;
   background: #0b4780;
-  margin-left: -4px;
-  top: 35px;
+  margin-left: -3px;
+  top: 65px;
   border-radius: 2px;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
@@ -222,8 +228,22 @@ body{
   text-justify: inter-word;
 }
 
+.footer {
+  font-family: "HelveticaNeue-Light";
+  font-size: 16px;
+  word-spacing: 10px;
+  letter-spacing: 5px;
+  -webkit-text-fill-color: #0b4780;
+  margin-top: -60px;
+  margin-bottom: 60px;
+}
+
+.footer_text {
+  margin-top: 30px;
+}
+
 .sensory_scroll{
-  padding-top: 20px;
+  padding-top: 100px;
   margin-bottom: 600px;
 }
 

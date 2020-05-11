@@ -238,6 +238,7 @@ for(let i = 0 ; i < arrayLength; i++) {
 
 			d3.selectAll('.gridCircle' + _this.id)
 				.transition().duration(500)
+				.style("stroke", "lightgray")
 				.style("stroke-opacity", "1")
 				.attr("r", function(d, i){return (radius*1.7)/cfg.levels*d;});
 
@@ -245,6 +246,7 @@ for(let i = 0 ; i < arrayLength; i++) {
 				.transition().duration(500)
 				.attr("x2", function(d, i){ return rScale(maxValue*1.7) * Math.cos(angleSlice*i - Math.PI/2); })
 				.attr("y2", function(d, i){ return rScale(maxValue*1.7) * Math.sin(angleSlice*i - Math.PI/2); })
+				.style("stroke", "lightgray")
 				.style("stroke-opacity", "1");
 
 			d3.selectAll('.legend' + _this.id)
@@ -285,7 +287,7 @@ for(let i = 0 ; i < arrayLength; i++) {
 				.transition().duration(0)
 				.style("position", "absolute")
 				.style("top", "130px")
-				.style("left", "30%");
+				.style("left", "30.7%");
 				// .attr("transform", "translate(-50% , 0)");
 
 			d3.selectAll(".radarCircle" + _this.id)
