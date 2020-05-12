@@ -73,8 +73,8 @@ export default {
 <style scoped>
 .step {
   width: 100%;
-  padding: 15rem 3rem;
-  margin: 5rem 4rem 15rem;
+  padding: 15rem 0rem;
+  margin: 5rem 0rem 15rem;
   /* border: 1px solid #0b4780;
   background-color: white; */
   display: block;

@@ -2,7 +2,7 @@
     [
         {"axis":"overall", "value":0.6741935484, "rank":"3rd"},
         {"axis":"appearance", "value":0.6806451613, "rank":"3rd"},
-        {"axis":"expectation", "value":0.6387096774, "rank":"6th"},
+        {"axis":"appearance (jar)", "value":0.6387096774, "rank":"6th"},
         {"axis":"color", "value":0.6806451613, "rank":"4th"},
         {"axis":"color (jar)", "value":0.9139784946, "rank":"5th"},
         {"axis":"size (jar)", "value":0.8924731183, "rank":"1st"},
@@ -35,7 +35,7 @@
     [
         {"axis":"overall", "value":0.6811881188, "rank":"2nd"},
         {"axis":"appearance", "value":0.6772277228, "rank":"5th"},
-        {"axis":"expectation", "value":0.702970297, "rank":"1st"},
+        {"axis":"appearance (jar)", "value":0.702970297, "rank":"1st"},
         {"axis":"color", "value":0.6851485149, "rank":"3rd"},
         {"axis":"color (jar)", "value":0.9240924092, "rank":"3rd"},
         {"axis":"size (jar)", "value":0.7623762376, "rank":"9th"},
@@ -68,7 +68,7 @@
     [     
         {"axis":"overall", "value":0.6079207921, "rank":"7th"},
         {"axis":"appearance", "value":0.6326732673, "rank":"9th"},
-        {"axis":"expectation", "value": 0.598019802, "rank":"9th"},
+        {"axis":"appearance (jar)", "value": 0.598019802, "rank":"9th"},
         {"axis":"color", "value":0.6792079208, "rank":"5th"},
         {"axis":"color (jar)", "value":0.9306930693, "rank":"2nd"},
         {"axis":"size (jar)", "value":0.7755775578, "rank":"8th"},
@@ -101,7 +101,7 @@
     [
         {"axis":"overall", "value": 0.595049505, "rank":"8th"},
         {"axis":"appearance", "value":0.6772277228, "rank":"4th"},
-        {"axis":"expectation", "value":0.6376237624, "rank":"7th"},
+        {"axis":"appearance (jar)", "value":0.6376237624, "rank":"7th"},
         {"axis":"color", "value":0.6742574257, "rank":"6th"},
         {"axis":"color (jar)", "value":0.9108910891, "rank":"6th"},
         {"axis":"size (jar)", "value":0.8481848185, "rank":"3rd"},
@@ -134,7 +134,7 @@
     [
         {"axis":"overall", "value":0.6346534653, "rank":"4th"},
         {"axis":"appearance", "value":0.6475247525, "rank":"8th"},
-        {"axis":"expectation", "value":0.6336633663, "rank":"8th"},
+        {"axis":"appearance (jar)", "value":0.6336633663, "rank":"8th"},
         {"axis":"color", "value":0.6376237624, "rank":"9th"},
         {"axis":"color (jar)", "value":0.8943894389, "rank":"8th"},
         {"axis":"size (jar)", "value":0.8184818482, "rank":"6th"},
@@ -167,7 +167,7 @@
     [
         {"axis":"overall", "value":0.6811881188, "rank":"1st"},
         {"axis":"appearance", "value":0.7108910891, "rank":"1st"},
-        {"axis":"expectation", "value":0.6831683168, "rank":"2nd"},
+        {"axis":"appearance (jar)", "value":0.6831683168, "rank":"2nd"},
         {"axis":"color", "value":0.7089108911, "rank":"1st"},
         {"axis":"color (jar)", "value":0.9372937294, "rank":"1st"},
         {"axis":"size (jar)", "value":0.8514851485, "rank":"2nd"},
@@ -200,7 +200,7 @@
     [
         {"axis":"overall", "value":0.6085714286, "rank":"6th"},
         {"axis":"appearance", "value":0.6828571429, "rank":"2nd"},
-        {"axis":"expectation", "value":0.6714285714, "rank":"3rd"},
+        {"axis":"appearance (jar)", "value":0.6714285714, "rank":"3rd"},
         {"axis":"color", "value":0.6971428571, "rank":"2nd"},
         {"axis":"color (jar)", "value": 0.919047619, "rank":"4th"},
         {"axis":"size (jar)", "value":0.8238095238, "rank":"4th"},
@@ -233,7 +233,7 @@
     [
         {"axis":"overall", "value":0.5891089109, "rank":"9th"},
         {"axis":"appearance", "value":0.6564356436, "rank":"7th"},
-        {"axis":"expectation", "value":0.6633663366, "rank":"4th"},
+        {"axis":"appearance (jar)", "value":0.6633663366, "rank":"4th"},
         {"axis":"color", "value":0.6564356436, "rank":"8th"},
         {"axis":"color (jar)", "value":0.8877887789, "rank":"9th"},
         {"axis":"size (jar)", "value": 0.798679868, "rank":"7th"},
@@ -266,7 +266,7 @@
     [
         {"axis":"overall", "value":0.6118811881, "rank":"5th"},
         {"axis":"appearance", "value":0.6742574257, "rank":"6th"},
-        {"axis":"expectation", "value":0.6613861386, "rank":"5th"},
+        {"axis":"appearance (jar)", "value":0.6613861386, "rank":"5th"},
         {"axis":"color", "value":0.6673267327, "rank":"7th"},
         {"axis":"color (jar)", "value":0.9108910891, "rank":"7th"},
         {"axis":"size (jar)", "value":0.8217821782, "rank":"5th"},

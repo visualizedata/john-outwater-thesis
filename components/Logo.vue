@@ -1,7 +1,7 @@
 <template>
 <div class="landing">
   <!-- <img src="~/assets/landing_text.png" width="500" height="97.5"> -->
-  <img src="~/assets/landingFinal.png" width="732" height="600">
+  <img src="~/assets/landingFinal.png" width="549" height="450">
   </div>
 </template>
 <style scoped>

@@ -50,7 +50,7 @@ drawBars(){
     console.log(this.berryData);
 
     var margin = {top: 80, right: 180, bottom: 80, left: 180},
-        width = 1675 - margin.left - margin.right,
+        width = 1500 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
     var svg = d3.select(".bar2_graph").append("svg")
@@ -135,7 +135,7 @@ updateBars(){
 console.log("running");
 
 var margin = {top: 80, right: 180, bottom: 80, left: 180},
-        width = 1675 - margin.left - margin.right,
+        width = 1500 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
 var data = this.berryData;
@@ -215,7 +215,7 @@ let _this=this;
     align-content: left;
     justify-content: left;
     margin-top: 20rem;
-    margin-left: 7rem;
+    margin-left: 0.5rem;
 }
 
 .drop{
@@ -228,7 +228,7 @@ let _this=this;
     background-color: #fffcf6;
     display: flex;
     align-content: left;
-    margin-left: 10%;
+    /* margin-left: 40%; */
     padding-top: 200px;
     padding-bottom: 10px;
 }
@@ -237,6 +237,7 @@ let _this=this;
     justify-content: center;
     align-items: center;
     background-color: #fffcf6;
+    margin-left: 8%
 }
 
 .circle {
